@@ -19,6 +19,44 @@ After discovery, verify:
 
 ---
 
+## VISUAL RESEARCH (Playwright MCP)
+
+Code analysis alone misses visual context. **If the app is running**, use Playwright MCP to:
+
+### 1. Browse the Running App
+
+```
+Navigate to localhost:3000 (or wherever the app runs)
+Take snapshots of each page
+Capture different viewport sizes (mobile, tablet, desktop)
+```
+
+This reveals:
+- Actual rendered appearance (not just code structure)
+- Real spacing, colors, typography in context
+- Responsive behavior
+- Animation/transition patterns
+- Current visual hierarchy
+
+### 2. Capture Current State
+
+Take screenshots of:
+- Every detected page/route
+- Key interactive states (modal open, dropdown expanded)
+- Mobile vs desktop views
+- Light/dark mode if supported
+
+Store context in your analysis - the visual state informs proposal quality.
+
+### 3. When App Isn't Running
+
+If the dev server isn't available:
+- Note this limitation in the profile
+- Rely on code analysis
+- Ask user to describe key visual patterns
+
+---
+
 ## DETECTION STRATEGIES
 
 ### 1. Page/Route Detection (Universal Heuristics)
@@ -315,6 +353,7 @@ You are analyzing an application to build a profile for redesign.
 - Grep: search file contents
 - Read: examine specific files
 - Bash(ls): list directories
+- Playwright MCP: browse running app, take snapshots (if app is running)
 
 ## DO NOT
 

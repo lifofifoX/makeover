@@ -2,6 +2,23 @@
 
 A Claude Code skill that redesigns any existing application with distinctive, production-grade visual themes.
 
+## Requirements
+
+This skill requires:
+
+| Dependency | Purpose | Installation |
+|------------|---------|--------------|
+| **frontend-design plugin** | Generates distinctive, high-quality designs that avoid generic "AI slop" aesthetics | `/plugins add claude-plugins-official/frontend-design` |
+| **Playwright MCP** | Browses your app and reference sites to understand current design and gather inspiration | [playwright-mcp](https://github.com/microsoft/playwright-mcp) |
+
+**Why frontend-design?** Without it, themes tend toward generic patterns (Inter font, purple gradients, standard card layouts). The plugin enforces creative forcing functions: unexpected typography, bold color choices, distinctive layouts.
+
+**Why Playwright MCP?** Essential for:
+- Browsing your running app to see what it actually looks like (not just reading code)
+- Visiting reference websites for design inspiration
+- Understanding current visual patterns, spacing, typography in context
+- Capturing screenshots of existing designs for analysis
+
 ## Installation
 
 ```bash
@@ -142,10 +159,23 @@ Wild themes use unconventional navigation, theatrical data presentation, visual 
 - **Iterate** — refine proposals with specific feedback
 - **Check mobile** — proposals include responsive layouts
 
-## Requirements
+## Visual Research Workflow
 
-- [Claude Code](https://claude.ai/code) CLI
-- `frontend-design` plugin (for generating proposals)
+For best results, ensure Playwright MCP can browse:
+
+```bash
+# Have your app running locally
+bin/dev  # or npm run dev, etc.
+
+# Then during discovery/proposal:
+"Browse localhost:3000 and take screenshots of each page"
+"Visit stripe.com and linear.app for inspiration"
+```
+
+The skill uses browser automation to:
+- Capture your current app's visual state during discovery
+- Visit reference sites when you provide inspiration URLs
+- Understand responsive behavior by checking different viewports
 
 ## License
 

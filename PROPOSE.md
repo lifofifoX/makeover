@@ -292,7 +292,32 @@ Transform tabular data:
 
 ---
 
-## Analyzing Image References
+## Visual Research for Inspiration
+
+### Browsing Reference Sites (Playwright MCP)
+
+When the user mentions inspiration sources (websites, brands, styles), use Playwright MCP to visit them:
+
+```
+"I want something like stripe.com and linear.app"
+→ Navigate to stripe.com, take snapshots
+→ Navigate to linear.app, take snapshots
+→ Analyze: typography, spacing, color, layout patterns, motion
+```
+
+This provides:
+- Actual rendered designs (not descriptions)
+- Real typography choices and pairings
+- Color relationships in context
+- Layout patterns and whitespace usage
+- Interaction patterns and hover states
+
+**When to browse:**
+- User mentions specific sites ("like Notion", "Vercel vibes")
+- User provides URLs
+- Vague inspiration ("minimal SaaS", "editorial magazine") - find canonical examples
+
+### Analyzing Image References
 
 When the user provides reference images:
 

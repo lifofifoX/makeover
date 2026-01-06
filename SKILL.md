@@ -7,6 +7,15 @@ description: Redesign any existing app with distinctive, production-grade visual
 
 Transform any existing application with distinctive, high-quality visual redesigns. Works with any tech stack by auto-detecting structure and adapting to existing styling systems.
 
+## Dependencies
+
+| Requirement | Purpose |
+|-------------|---------|
+| **frontend-design plugin** | Enforces distinctive, high-quality aesthetics. Without it, themes drift toward generic patterns. |
+| **Playwright MCP** | Browses your running app and reference sites for visual research. Essential for understanding current design. |
+
+Install: `/plugins add claude-plugins-official/frontend-design`
+
 ## Commands
 
 ```
