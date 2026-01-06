@@ -9,7 +9,7 @@ This skill requires:
 | Dependency | Purpose | Installation |
 |------------|---------|--------------|
 | **frontend-design plugin** | Generates distinctive, high-quality designs that avoid generic "AI slop" aesthetics | `/plugins add claude-plugins-official/frontend-design` |
-| **Playwright MCP** | Browses your app and reference sites to understand current design and gather inspiration | [playwright-mcp](https://github.com/microsoft/playwright-mcp) |
+| **Playwright MCP** | Browses your app and reference sites to understand current design and gather inspiration | `claude mcp add playwright npx @playwright/mcp@latest` ([repo](https://github.com/microsoft/playwright-mcp)) |
 
 **Why frontend-design?** Without it, themes tend toward generic patterns (Inter font, purple gradients, standard card layouts). The plugin enforces creative forcing functions: unexpected typography, bold color choices, distinctive layouts.
 

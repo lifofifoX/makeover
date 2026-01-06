@@ -14,7 +14,9 @@ Transform any existing application with distinctive, high-quality visual redesig
 | **frontend-design plugin** | Enforces distinctive, high-quality aesthetics. Without it, themes drift toward generic patterns. |
 | **Playwright MCP** | Browses your running app and reference sites for visual research. Essential for understanding current design. |
 
-Install: `/plugins add claude-plugins-official/frontend-design`
+Install:
+- `/plugins add claude-plugins-official/frontend-design`
+- `claude mcp add playwright npx @playwright/mcp@latest`
 
 ## Commands
 
