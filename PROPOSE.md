@@ -535,11 +535,18 @@ Box diagram showing DNA structure.
 
 ## Realistic Content
 
-Use placeholder content appropriate to the app type:
-- For e-commerce: products, prices, cart
-- For dashboard: metrics, charts, data
-- For portfolio: projects, case studies
-- For social: posts, profiles, interactions
+**Use actual images, not placeholders.** Sources:
+- Screenshots from the user's running app (captured during discovery)
+- Relevant images from the web (Unsplash, product photos, etc.)
+- Images from the app's existing assets
+
+Content should match the app type:
+- For e-commerce: real product photos, prices, cart
+- For dashboard: realistic metrics, charts, data
+- For portfolio: actual project images, case studies
+- For social: realistic posts, profile photos, interactions
+
+**Never use:** gray boxes, "placeholder" text, or generic colored rectangles for images.
 
 ## DO NOT
 
@@ -643,12 +650,12 @@ After all proposals complete, generate:
     }
     .card-preview {
       aspect-ratio: 16/10;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: rgba(255,255,255,0.9);
+      background: #f0f0f0;
+    }
+    .card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .card-body {
       padding: 1.25rem;
@@ -678,7 +685,9 @@ After all proposals complete, generate:
   <div class="grid">
     <!-- Repeat for each proposal — entire card is clickable -->
     <a href="[name].html" class="card">
-      <div class="card-preview">[emoji or initial]</div>
+      <div class="card-preview">
+        <img src="[screenshot or representative image from proposal]" alt="[Theme Name] preview">
+      </div>
       <div class="card-body">
         <h2 class="card-title">[Theme Name]</h2>
         <p class="card-dna">DNA: [code]</p>
