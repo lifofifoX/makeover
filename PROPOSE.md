@@ -82,6 +82,17 @@ Proposal C: H8-L7-G4-D6-C4 (hidden, scroll story, list, overlay, text row)
 
 These patterns appear too frequently. **Do not use unless the concept demands it:**
 
+### Overused Themes
+
+These archetypes are generated too frequently across projects. **Avoid defaulting to these:**
+- **Brutalist** — raw concrete, harsh typography
+- **Terminal/Hacker** — green-on-black, monospace everything
+- **Mission Control/NASA** — telemetry, countdown timers
+- **Zine/Punk** — xerox textures, cut-out collage
+- **Medical Records/Clinical** — clipboard aesthetic, diagnosis forms
+
+**Instead:** Explore the full LIBRARY.md — there are 50+ archetypes. Pick unexpected combinations. If your first instinct is one of the above, force yourself to choose something else.
+
 ### Layout
 - Generic 3-column card grid with uniform sizing
 - Standard 2-column detail page without justification
@@ -290,6 +301,12 @@ Transform tabular data:
 - Distressed, corrupted text
 - Ransom note cut-outs
 
+### Wild Mode BANNED Effects
+
+These effects are overused in wild mode. **Do not use:**
+- **Horizontal scan line** — the animated line that scrolls from top to bottom (CRT scan effect)
+- **Full-screen glitch on load** — overwhelming and predictable
+
 ---
 
 ## Visual Research for Inspiration
@@ -316,6 +333,11 @@ This provides:
 - User mentions specific sites ("like Notion", "Vercel vibes")
 - User provides URLs
 - Vague inspiration ("minimal SaaS", "editorial magazine") - find canonical examples
+
+**When NOT to use Playwright:**
+- Do NOT screenshot the generated proposal HTML files — they are self-contained and the user opens them directly in their browser
+- Do NOT browse unless the user explicitly asks or provides reference URLs
+- Do NOT use Playwright just to "verify" proposals — trust the HTML output
 
 ### Analyzing Image References
 
@@ -582,32 +604,87 @@ After all proposals complete, generate:
 <head>
   <title>Makeover Proposals</title>
   <style>
-    body { font-family: system-ui; padding: 2rem; max-width: 1200px; margin: 0 auto; }
-    h1 { margin-bottom: 2rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
-    .card { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
-    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #f5f5f5; }
-    .card-body { padding: 1rem; }
-    .card h2 { margin: 0 0 0.5rem; font-size: 1.25rem; }
-    .card p { margin: 0 0 1rem; color: #666; font-size: 0.875rem; }
-    .card a { color: #0066cc; }
-    .dna { font-family: monospace; font-size: 0.75rem; color: #999; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #fafafa;
+      color: #1a1a1a;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+    }
+    .subtitle {
+      color: #666;
+      margin: 0 0 2.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      display: block;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+    .card-preview {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .card-body {
+      padding: 1.25rem;
+    }
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+    }
+    .card-dna {
+      font-family: ui-monospace, monospace;
+      font-size: 0.75rem;
+      color: #888;
+      margin: 0 0 0.75rem;
+    }
+    .card-desc {
+      font-size: 0.875rem;
+      color: #555;
+      margin: 0;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
   <h1>Makeover Proposals</h1>
-  <p>Generated: [timestamp]</p>
+  <p class="subtitle">Generated: [timestamp] · Click any card to view full preview</p>
   <div class="grid">
-    <!-- Repeat for each proposal -->
-    <div class="card">
-      <img src="placeholder" alt="[name] preview">
+    <!-- Repeat for each proposal — entire card is clickable -->
+    <a href="[name].html" class="card">
+      <div class="card-preview">[emoji or initial]</div>
       <div class="card-body">
-        <h2>[Theme Name]</h2>
-        <p class="dna">DNA: [code]</p>
-        <p>[Brief description]</p>
-        <a href="[name].html">View full preview →</a>
+        <h2 class="card-title">[Theme Name]</h2>
+        <p class="card-dna">DNA: [code]</p>
+        <p class="card-desc">[Brief description]</p>
       </div>
-    </div>
+    </a>
   </div>
 </body>
 </html>
