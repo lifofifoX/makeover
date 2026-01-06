@@ -23,7 +23,7 @@ This skill requires:
 
 ```bash
 mkdir -p .claude/skills
-git clone https://github.com/YOUR_USERNAME/makeover .claude/skills/makeover
+git clone https://github.com/lifofifoX/makeover .claude/skills/makeover
 ```
 
 ## Quick Start
