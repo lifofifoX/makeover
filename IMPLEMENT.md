@@ -7,15 +7,14 @@ Everything needed to implement approved themes. **Read this entire file before s
 ## IMPLEMENTATION CHECKLIST
 
 ### Prerequisites
-- [ ] **Discovery complete** — `tmp/makeover/profile.md` exists
 - [ ] **Proposal approved** — `tmp/makeover/themes/{name}.html` exists
-- [ ] **Profile reviewed** — know output paths, patterns, build commands
+- [ ] **Metadata extracted** — read MAKEOVER_METADATA comment from proposal
 
 ### Implementation
 - [ ] **Strategy chosen** — drop-in or incremental
 - [ ] **Styling output** — matches detected system (Tailwind, CSS vars, etc.)
-- [ ] **Interactive patterns** — preserved from profile
-- [ ] **All pages covered** — every page from profile
+- [ ] **Interactive patterns** — preserved from existing code
+- [ ] **All pages covered** — every page from proposal
 - [ ] **Components styled** — all detected components
 
 ### Verification
@@ -27,11 +26,34 @@ Everything needed to implement approved themes. **Read this entire file before s
 
 ---
 
+## EXTRACTING PROPOSAL METADATA
+
+Every proposal includes embedded metadata at the top:
+
+```html
+<!--
+MAKEOVER_METADATA
+theme: midnight-cinema
+dna: H4-L5-G2-D8-C2-N4
+styling_system: Tailwind
+pages: home, dashboard, settings, profile
+-->
+```
+
+Extract this to understand:
+- **styling_system** — determines output format (Tailwind classes, CSS vars, etc.)
+- **pages** — what pages were designed
+- **dna** — layout decisions made
+
+Detect build commands and interactive patterns from codebase (package.json, component files).
+
+---
+
 ## IMPLEMENTATION STRATEGY
 
 ### Determine Strategy
 
-Read from profile:
+Read from proposal metadata:
 - **App complexity** (number of pages, components)
 - **Styling system** (how intertwined with functionality)
 - **Risk tolerance** (user preference if stated)
@@ -84,7 +106,7 @@ Best for:
 
 ### Tailwind CSS
 
-If profile shows Tailwind, output Tailwind-native:
+If metadata shows Tailwind, output Tailwind-native:
 
 ```css
 /* app/styles/theme-{name}.css */
@@ -119,7 +141,7 @@ theme: {
 
 ### CSS Modules
 
-If profile shows CSS modules:
+If metadata shows CSS modules:
 
 ```css
 /* ComponentName.module.css */
@@ -146,7 +168,7 @@ With global variables:
 
 ### Styled-Components / Emotion
 
-If profile shows CSS-in-JS:
+If metadata shows CSS-in-JS:
 
 ```jsx
 // theme.js
@@ -243,15 +265,18 @@ If no system detected, use CSS custom properties:
 
 ## PRESERVING INTERACTIVE PATTERNS
 
-### From Profile
+### Detection
 
-Read the "Interactive Patterns" section of profile.md carefully.
+Detect interactive patterns from existing code:
+- Search for modal/dialog components
+- Check for data-state or class-based toggles
+- Look for auth context/state patterns
 
 ### Common Patterns
 
 #### Modal with data-state
 
-If profile says modals use `data-state`:
+If app uses `data-state` pattern:
 
 ```css
 /* Modal closed */
@@ -272,7 +297,7 @@ If profile says modals use `data-state`:
 
 #### Modal with class toggle
 
-If profile says modals use class:
+If app uses class-based pattern:
 
 ```css
 .modal {
@@ -288,7 +313,7 @@ If profile says modals use class:
 
 #### Auth-dependent UI
 
-If profile identifies auth patterns:
+If app has auth-dependent patterns:
 
 ```css
 /* Default: logged out */
@@ -331,8 +356,8 @@ If profile identifies auth patterns:
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| Styles not loading | Wrong output path | Check profile for correct path |
-| Modals broken | Pattern mismatch | Use exact pattern from profile |
+| Styles not loading | Wrong output path | Check codebase for correct path |
+| Modals broken | Pattern mismatch | Detect pattern from existing code |
 | Build fails | Syntax error or missing import | Check build command output |
 | Layout broken | CSS specificity issue | Increase specificity or use !important |
 | Mobile broken | Missing media queries | Add responsive styles |
@@ -388,88 +413,28 @@ If profile identifies auth patterns:
 ## IMPLEMENTATION AGENT PROMPT
 
 ```
-You are implementing a theme from an approved preview.
+Implement the approved theme from preview HTML.
 
-## CRITICAL: Read First
+## Read First
+1. tmp/makeover/themes/{name}.html — the approved design (extract MAKEOVER_METADATA)
+2. IMPLEMENT.md — output format patterns
+3. package.json — build commands
 
-1. Read tmp/makeover/profile.md — understand app structure
-2. Read tmp/makeover/themes/{name}.html — the approved design
-3. Read IMPLEMENT.md — technical patterns
+## Task
+1. Invoke frontend-design plugin
+2. Extract metadata from proposal HTML comment
+3. Extract CSS from proposal's <style> tags — DO NOT rewrite
+4. Adapt to detected styling system (from metadata)
+5. Detect output paths from codebase structure
+6. Run build commands and verify
 
-## App Context
-
-[INSERT PROFILE SUMMARY]
-
-Output paths: [from profile]
-Styling system: [from profile]
-Build commands: [from profile]
-Interactive patterns: [from profile]
-
-## Use frontend-design Plugin
-
-Invoke: Skill tool: skill="frontend-design", args="Implement {name} theme"
-
-## Match the Preview EXACTLY
-
-The preview shows the approved design. Your implementation must match:
-- Same colors (extract from palette section)
-- Same typography
-- Same layout structure
-- Same component styling
-
-## How to Match the Proposal
-
-### 1. Copy CSS Directly
-
-The proposal HTML contains ALL CSS inline in `<style>` tags:
-- Extract CSS rules and adapt to styling system
-- Keep class names consistent
-- DO NOT rewrite or "improve" the CSS
-
-### 2. Adapt to Styling System
-
-If Tailwind:
-- Convert to @theme variables and utility classes
-- Use @layer components for custom classes
-
-If CSS Modules:
-- Create module files per component
-- Use CSS variables for tokens
-
-If vanilla:
-- Create comprehensive variables
-- Organize by component
-
-### 3. Preserve Interactions
-
-Use EXACT patterns from profile:
-- Modal open/close mechanism
-- Auth state display logic
-- Loading state patterns
-- Form validation display
-
-## Output Files
-
-Create files at paths specified in profile:
-- Main style file(s)
-- Component styles (if applicable)
-- Any template updates (if layout changed)
-
-## Verification
-
-After creating files:
-1. Run build commands from profile
-2. Test each page
-3. Test all interactions
-4. Check mobile responsiveness
-5. Confirm visual match to proposal
+## Constraints
+- Match preview exactly: colors, typography, layout, components
+- Use same class names
+- Detect and preserve interactive patterns from existing code
 
 ## Return
-
-- Files created (list paths)
-- Build status
-- Verification results
-- Any issues encountered
+Files created, build status, verification results, any issues
 ```
 
 ---
@@ -505,4 +470,4 @@ If implementation fails, document:
 - Why it broke
 - What the fix should be
 
-Add to profile.md notes for future attempts.
+Document in a notes file for future attempts.

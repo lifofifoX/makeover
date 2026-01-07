@@ -21,8 +21,6 @@ Install:
 ## Commands
 
 ```
-/makeover discover                        # Analyze app structure, detect pages
-/makeover audit                           # Optional: analyze current design
 /makeover propose [count] [inspiration...] # Generate theme proposals
 /makeover propose [count] --wild          # Generate experimental proposals
 /makeover implement [names]               # Implement approved themes
@@ -30,38 +28,24 @@ Install:
 
 ## Workflow Overview
 
-### Phase 0: Discover (Auto-runs on first use)
+### Propose (Primary Entry Point)
 
-1. **Read DISCOVER.md** for detection strategies
-2. **Scan codebase** — routes, pages, components, layouts
-3. **Detect styling system** — Tailwind, CSS modules, styled-components, etc.
-4. **Identify interactive patterns** — modals, dropdowns, auth states
-5. **Generate app profile** at `tmp/makeover/profile.md`
-6. **Report**: summary of detected pages, components, patterns
-
-### Phase 1: Audit (Optional)
-
-1. **Read AUDIT.md** for audit methodology
-2. **Analyze current design** — colors, spacing, typography, consistency
-3. **Generate audit report** at `tmp/makeover/audit.md`
-4. **Report**: strengths, weaknesses, opportunities
-
-### Phase 2: Propose
-
-1. **Read PROPOSE.md** for proposal requirements
-2. **Read LIBRARY.md** and select inspirations
-3. **Review app profile** from discover phase
-4. **Generate theme specs** with unique Layout DNA
-5. **Spawn parallel proposal agents** — each creates `tmp/makeover/themes/{name}.html`
-6. **Generate index** at `tmp/makeover/themes/index.html`
+1. **Ask for app URL** — "Where is your app running?" (default: localhost:3000)
+2. **Browse with Playwright** — visit running app, discover pages
+3. **Ask user which pages** — use AskUserQuestion to confirm pages for proposal
+4. **Capture real UI** — snapshot actual DOM structure, content, images from each page
+5. **Detect styling system** — Tailwind, CSS modules, etc. (lightweight, inline)
+6. **Generate proposals** — apply themes to REAL app content
 7. **Report**: "Open tmp/makeover/themes/index.html to compare"
 
-### Phase 3: Implement
+Proposals show exactly how themes look on your actual app, not mock content.
 
-1. **Read IMPLEMENT.md** for technical requirements
-2. **Read approved preview** at `tmp/makeover/themes/{name}.html`
-3. **Determine implementation strategy** — drop-in or incremental
-4. **Spawn implementation agents** with full context
+### Implement
+
+1. **Read approved preview** at `tmp/makeover/themes/{name}.html`
+2. **Extract embedded metadata** — styling system, patterns, build commands
+3. **Copy CSS from proposal** — adapt to detected styling system
+4. **Preserve interactive patterns** — modals, auth states work as before
 5. **Run build and verify**
 
 ## File Structure
@@ -69,8 +53,7 @@ Install:
 | File | Purpose | When to Read |
 |------|---------|--------------|
 | `SKILL.md` | This file — commands and overview | Always |
-| `DISCOVER.md` | App analysis, page detection | Before first use |
-| `AUDIT.md` | Design audit methodology | When using audit command |
+| `CRAFT.md` | Elite design principles, anti-AI patterns | **Before every proposal** |
 | `PROPOSE.md` | Proposal requirements, agent prompts | Before proposing |
 | `IMPLEMENT.md` | Implementation patterns, checklists | Before implementing |
 | `LIBRARY.md` | DNA options, palettes, archetypes | During proposal ideation |
@@ -124,35 +107,32 @@ Share **image files** before running the skill:
 ## Output Structure
 
 ```
-tmp/makeover/
-├── profile.md              # App analysis (from discover)
-├── audit.md                # Design audit (optional)
-└── themes/
-    ├── index.html          # Comparison page
-    ├── {name}.html         # Individual previews
-    └── ...
+tmp/makeover/themes/
+├── index.html          # Comparison page
+├── {name}.html         # Individual previews (with embedded metadata)
+└── ...
 ```
-
-Implemented themes go to your app's existing style directories, detected during discover phase.
 
 ## Key Advantages
 
 | Aspect | Traditional Theming | Makeover |
 |--------|---------------------|----------|
-| Pages | Manual enumeration | Auto-detected from routes/files |
+| Content | Mock/placeholder data | Your actual app UI |
+| Pages | Manual enumeration | Auto-detected via Playwright |
 | Styling | Assumes specific system | Detects & adapts (Tailwind, CSS modules, etc.) |
-| Patterns | Requires documentation | Discovered via code analysis |
-| Output paths | Hardcoded | Detected from codebase |
 | Framework | Framework-specific | Framework-agnostic |
 
 ## Quick Start
 
 ```bash
-# First time: discover your app
-/makeover discover
-
-# Review the profile, then propose themes
+# Start your app, then propose themes
 /makeover propose 3 "minimal" "dark"
+# → Asks for app URL, browses with Playwright
+# → Asks which pages to include
+# → Generates proposals using your real UI
+
+# Or go wild
+/makeover propose 2 --wild "vaporwave"
 
 # Open previews, pick favorites
 open tmp/makeover/themes/index.html

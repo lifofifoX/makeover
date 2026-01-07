@@ -8,12 +8,14 @@ Everything needed to generate theme proposals. **Read this entire file before sp
 
 Every proposal MUST include:
 
+### Required Elements
 - [ ] **Layout DNA declared** — unique combination not used by existing themes
 - [ ] **Motion DNA declared** — N1-N9 motion intensity level (see MOTION.md)
 - [ ] **Color palette** with:
   - [ ] Evocative name (e.g., "Midnight Cinema", "Sakura Dusk")
-  - [ ] 5-7 colors with hex codes
+  - [ ] 5-7 colors with hex codes (NO pure #000 or #FFF)
   - [ ] Color roles defined (background, surface, text, accent, etc.)
+  - [ ] All neutrals share same temperature undertone
   - [ ] Color story (2-3 sentences on why these work together)
   - [ ] Visual swatches in the preview
 - [ ] **Motion design specified** with:
@@ -21,10 +23,18 @@ Every proposal MUST include:
   - [ ] Hover/interaction effects (buttons, cards, links)
   - [ ] Ambient motion (if N4+)
   - [ ] Page transitions (if N6+)
-- [ ] **App-specific pages shown** — all pages from profile.md
-- [ ] **Interactive patterns preserved** — modals, dropdowns work per profile
+- [ ] **App-specific pages shown** — all pages captured via Playwright
+- [ ] **Interactive patterns preserved** — modals, dropdowns work as detected
 - [ ] **Styling system respected** — output matches detected system
 - [ ] **2-3 specific references cited** from LIBRARY.md
+
+### Elite Craft Verification (CRAFT.md)
+- [ ] **Spacing from scale only** — 4/8/12/16/24/32/48/64px, no arbitrary values
+- [ ] **Typography polish** — curly quotes, proper dashes, letterspacing on caps
+- [ ] **Color discipline** — no pure black/white, accent used ≤10% of surface
+- [ ] **Anti-AI checkpoint passed** — no generic gradients, same-radius-everywhere, shadow-on-everything
+- [ ] **Removal pass done** — nothing decorative that doesn't serve function
+- [ ] **Squint test passed** — hierarchy obvious when blurred
 
 ---
 
@@ -32,11 +42,71 @@ Every proposal MUST include:
 
 Before proposing, ensure:
 
-1. **Discovery completed** — `tmp/makeover/profile.md` exists
-2. **Read profile** — understand pages, patterns, styling system
-3. **Read audit** (if exists) — `tmp/makeover/audit.md`
-4. **Read LIBRARY.md** — select specific inspirations
-5. **Read MOTION.md** — understand motion options and techniques
+1. **App is running** — user provides URL (default: localhost:3000)
+2. **Read CRAFT.md** — internalize elite design principles
+3. **Read LIBRARY.md** — select specific inspirations
+4. **Read MOTION.md** — understand motion options and techniques
+
+---
+
+## CAPTURING REAL APP UI (Playwright MCP)
+
+Proposals show **your actual app**, not mock content. Use Playwright to capture real UI.
+
+### Step 1: Ask for App URL
+
+```
+"Where is your app running?"
+Default: http://localhost:3000
+```
+
+### Step 2: Browse and Discover Pages
+
+Navigate to the app URL. Explore by:
+- Clicking navigation links
+- Checking common routes (/dashboard, /settings, /profile, /[id])
+- Looking at the DOM for route information
+
+Capture each distinct page:
+- Take a snapshot (accessibility tree)
+- Note the URL/route
+- Note the page purpose
+
+### Step 3: Ask User Which Pages
+
+Use AskUserQuestion to confirm:
+
+```
+"I found these pages in your app:
+- / (Home/Landing)
+- /dashboard (Main dashboard)
+- /settings (User settings)
+- /profile/[id] (User profiles)
+
+Which pages should appear in the theme proposals?"
+```
+
+Options: Let user select multiple, or suggest "All of these (Recommended)"
+
+### Step 4: Capture DOM Structure
+
+For each selected page, extract:
+- **Actual content** — real text, headings, labels
+- **Real images** — actual image URLs from the page
+- **Component structure** — buttons, cards, forms, modals
+- **Current classes** — detect Tailwind, CSS modules, etc.
+
+Store this as context for proposal agents.
+
+### Step 5: Detect Styling System (Inline)
+
+Quick detection from DOM/files:
+- Tailwind: class names like `bg-blue-500`, `px-4`
+- CSS Modules: class names like `styles_button__abc123`
+- Styled-components: `sc-` prefixed classes
+- Vanilla CSS: standard class names, inline styles
+
+Note the system for proposal metadata.
 
 ---
 
@@ -119,13 +189,107 @@ These archetypes are generated too frequently across projects. **Avoid defaultin
 
 ---
 
-## ADAPTING TO APP PROFILE
+## ELITE DESIGN REQUIREMENTS
 
-### Reading the Profile
+These requirements separate professional-quality output from generic AI design. **Mandatory for all proposals.**
 
-Before designing, extract from `tmp/makeover/profile.md`:
+### Spacing System (Non-Negotiable)
 
-1. **Pages to design** — create sections for each detected page
+All spacing must come from this scale. No arbitrary values.
+
+```css
+--space-1: 4px;   /* micro gaps */
+--space-2: 8px;   /* tight gaps */
+--space-3: 12px;  /* small gaps */
+--space-4: 16px;  /* default */
+--space-6: 24px;  /* comfortable */
+--space-8: 32px;  /* section gaps */
+--space-12: 48px; /* large breaks */
+--space-16: 64px; /* major divisions */
+```
+
+**Enforce:** Every `padding`, `margin`, and `gap` value must use these variables.
+
+### Typography Craft (Non-Negotiable)
+
+**Required in all proposals:**
+- Proper curly quotes (" " ' ') not straight quotes
+- En-dashes (–) for ranges, em-dashes (—) for breaks
+- Proper ellipsis (…) not three periods
+- Letterspacing on ALL CAPS text (+0.05em minimum)
+- Line-height decreases as font-size increases
+- Line lengths under 75 characters for body text
+
+**Letterspacing by context:**
+```css
+/* Headlines: tighten */
+h1, h2 { letter-spacing: -0.02em; }
+
+/* Body: default */
+p { letter-spacing: 0; }
+
+/* Small/caps: loosen */
+.label, .caps { letter-spacing: 0.05em; }
+```
+
+### Color Sophistication (Non-Negotiable)
+
+**Required:**
+- No pure `#000000` black — use `#0a0a0a`, `#0d0d0d`, or `#111111`
+- No pure `#FFFFFF` white in dark themes — use `#FAFAFA`, `#F5F5F5`
+- All neutrals share same temperature undertone (all warm OR all cool)
+- Accent color ≤10% of total surface area
+- Text contrast ratios: minimum 4.5:1 (WCAG AA)
+
+**Color role discipline:**
+```css
+/* Light theme example */
+--color-bg: #FAFAF8;        /* warm white, not pure */
+--color-surface: #FFFFFF;   /* cards lift off background */
+--color-border: rgba(0,0,0,0.08); /* subtle, not prominent */
+--color-text: #1a1a1a;      /* near-black, not pure */
+--color-text-secondary: rgba(26,26,26,0.65);
+--color-accent: #...;       /* used sparingly */
+```
+
+### The Anti-AI Checkpoint
+
+**Before finalizing any proposal, verify you haven't fallen into these patterns:**
+
+| Check | If You Did This... | Do This Instead |
+|-------|-------------------|-----------------|
+| Gradient backgrounds | Ask: is this serving a purpose? | Flat color unless conceptually necessary |
+| Same border-radius everywhere | Vary by element size | Large elements: 12-16px, small: 4-8px |
+| Shadows on every card | Only where depth aids hierarchy | Borders or background difference instead |
+| Hover effects on everything | Only interactive elements | Static elements stay static |
+| Multiple accent colors | Pick ONE accent | Use opacity variants if needed |
+| Decorative blobs/waves | Why is this here? | Remove unless concept demands |
+| Icons next to obvious labels | Text alone is fine | Icons only when they add clarity |
+| Rainbow/neon gradients | Sophisticated restraint | Single-hue or analogous shifts |
+
+**The Squint Test:** Blur your vision. Is hierarchy still obvious? If everything looks the same importance, your design has failed.
+
+### The Removal Pass
+
+After designing, do one pass asking only: "What can I remove?"
+
+- That border? Probably unnecessary.
+- That shadow? Does it serve hierarchy?
+- That icon? Is the label clear without it?
+- That accent color usage? Could it be less frequent?
+- That animation? Does it aid understanding?
+
+**Elite design is what remains after everything unnecessary is removed.**
+
+---
+
+## ADAPTING TO CAPTURED APP
+
+### Using Captured Content
+
+From the Playwright capture:
+
+1. **Pages to design** — create sections for each captured page
 2. **Styling system** — match output format (Tailwind classes, CSS vars, etc.)
 3. **Interactive patterns** — preserve modal/dropdown behaviors
 4. **Component library** — style existing components, don't invent new ones
@@ -145,7 +309,7 @@ The DNA system is universal, but maps to your specific app:
 
 ### Respecting Detected Patterns
 
-If profile says modal uses `data-state`:
+If app uses `data-state` for modals:
 ```html
 <!-- CORRECT: matches detected pattern -->
 <div data-state="closed" class="modal">...</div>
@@ -154,7 +318,7 @@ If profile says modal uses `data-state`:
 <div class="modal hidden">...</div>
 ```
 
-If profile says styling is Tailwind:
+If app uses Tailwind:
 ```html
 <!-- CORRECT: Tailwind classes -->
 <button class="bg-primary text-white px-4 py-2">...</button>
@@ -377,33 +541,48 @@ Create themes that capture the essence while adding unique interpretations.
 
 ## Proposal Workflow
 
-### 1. Read Prerequisites
+### 1. Get App URL and Browse
 
 ```
-Read: tmp/makeover/profile.md
-Read: tmp/makeover/audit.md (if exists)
-Read: LIBRARY.md
+1. Ask user: "Where is your app running?" (default: localhost:3000)
+2. Navigate with Playwright MCP
+3. Explore pages via navigation
+4. Take snapshots of each page
 ```
 
-### 2. Determine Pages to Show
+### 2. Confirm Pages with User
 
-From profile, identify:
-- Landing/home page
-- List/collection pages
-- Detail pages
-- Settings/profile pages
-- Any special pages
+Use AskUserQuestion:
+- List discovered pages
+- Let user select which to include
+- "All pages (Recommended)" as first option
 
-### 3. Parallel Execution
+### 3. Capture Page Content
 
-Spawn all proposal agents in a SINGLE message:
+For each selected page:
+- Extract DOM structure
+- Capture real text/content
+- Note image URLs
+- Detect styling system
+
+### 4. Read Design References
+
+```
+Read: CRAFT.md (mandatory)
+Read: LIBRARY.md (select 2-3 specific references)
+Read: MOTION.md (for motion techniques)
+```
+
+### 5. Parallel Execution
+
+Spawn all proposal agents in a SINGLE message, passing captured page content:
 
 ```
 Task(subagent_type="general-purpose", description="Propose {name} theme", prompt="...")
 Task(subagent_type="general-purpose", description="Propose {name} theme", prompt="...")
 ```
 
-### 4. Generate Index
+### 6. Generate Index
 
 After proposals complete, create `tmp/makeover/themes/index.html` with links to all.
 
@@ -412,192 +591,88 @@ After proposals complete, create `tmp/makeover/themes/index.html` with links to 
 ## Proposal Agent Prompt Template
 
 ```
-You are creating a PREVIEW PROPOSAL for a theme, not implementing it.
+You are creating a PREVIEW PROPOSAL for a theme using REAL APP CONTENT.
 
-## CRITICAL: Read First
+## Read First (All Mandatory)
+1. CRAFT.md — elite design principles
+2. LIBRARY.md — select 2-3 specific references
+3. MOTION.md — motion techniques for your N-level
 
-1. Read tmp/makeover/profile.md — understand the app
-2. Read tmp/makeover/audit.md (if exists) — understand current issues
-3. Read LIBRARY.md — select inspirations
+## Captured App Content
 
-## App Context
+{PAGES_CONTENT}
+<!-- Orchestrator passes actual DOM/content captured via Playwright -->
 
-[INSERT PROFILE SUMMARY]
+## Assignment
 
-Pages to design: [list from profile]
-Styling system: [from profile]
-Interactive patterns: [from profile]
+Theme: {NAME}
+DNA: {H#-L#-G#-D#-C#-N#}
+References: {cite 2-3 from LIBRARY.md}
+Palette: {name} with 5-7 colors (no pure #000/#FFF)
+Styling System: {detected: Tailwind/CSS Modules/vanilla}
 
-## Your Selected References
+## Output
 
-You MUST cite 2-3 specific references from LIBRARY.md:
-REFERENCES: [item 1], [item 2], [item 3]
-
-## Layout DNA
-
-This theme's DNA: {DNA_CODE}
-- Header: {H_DESCRIPTION}
-- Home Layout: {L_DESCRIPTION}
-- Grid: {G_DESCRIPTION}
-- Detail Split: {D_DESCRIPTION}
-- Card Style: {C_DESCRIPTION}
-- Motion: {N_DESCRIPTION}
-
-## Motion Design
-
-Motion Level: {N_CODE} ({N_NAME})
-
-### Scroll Effects
-{SCROLL_EFFECTS}
-- Parallax layers (if N4+): {describe layers}
-- Scroll-triggered reveals: {describe what animates in}
-- Sticky transforms: {any sticky with progression}
-
-### Hover & Interactions
-- Buttons: {hover effect}
-- Cards: {hover effect}
-- Links: {underline animation}
-- Images: {zoom/filter effect}
-
-### Ambient Motion (if N4+)
-{AMBIENT_EFFECTS}
-- Floating elements: {if any}
-- Background animation: {gradient shift, particles, grain}
-- Cursor effects: {if N6+}
-
-### Page Transitions (if N6+)
-{PAGE_TRANSITIONS}
-
-### JS Enhancements (note for implementation)
-{LIST_JS_LIBRARIES_NEEDED}
-
-## Color Palette
-
-Palette Name: {PALETTE_NAME}
-Colors:
-- Background: {HEX} - {ROLE}
-- Surface: {HEX} - {ROLE}
-- Primary Text: {HEX} - {ROLE}
-- Accent: {HEX} - {ROLE}
-- [Additional colors...]
-
-Color Story: {WHY_THESE_COLORS}
-
-## Use frontend-design Plugin
-
-Invoke: Skill tool: skill="frontend-design", args="Create {AESTHETIC} theme preview"
-
-## Output: Single HTML File
-
-Create: tmp/makeover/themes/{name}.html
-
-Requirements:
-- ALL CSS inline in <style> tag
-- Google Fonts via CDN only
-- NO external dependencies
-- NO build step
+Single file: tmp/makeover/themes/{name}.html
+- All CSS in <style>, fonts via Google CDN only
+- Invoke frontend-design plugin first
+- Embed metadata for implementation (see below)
 
 ## Required Sections
+1. Theme header (name, DNA, references)
+2. Color palette with swatches and story
+3. Each captured page with REAL content (not mock data)
+4. Components (buttons, cards, forms, modals)
+5. Motion showcase (working scroll/hover effects)
 
-### 0. THEME HEADER
-- Theme name in display type
-- Layout DNA code
-- References cited
-- Brief description
+## Content Rules
+- Use ACTUAL text/headings from captured pages
+- Use ACTUAL image URLs from the app (or Unsplash if none exist)
+- Preserve ACTUAL navigation structure
+- Never use placeholder text like "Lorem ipsum" or "User Name"
 
-### 1. COLOR PALETTE DISPLAY
-- Named palette with swatches
-- Hex codes visible
-- Color story
+## Embed Implementation Metadata
 
-### 2. EACH PAGE FROM PROFILE
-For each page in profile.md, create a section showing:
-- Page layout
-- Key components
-- Interactive states
-- Responsive behavior (show mobile)
+Include this comment block at the top of the HTML:
+<!--
+MAKEOVER_METADATA
+theme: {name}
+dna: {H#-L#-G#-D#-C#-N#}
+styling_system: {Tailwind|CSS Modules|vanilla}
+pages: {comma-separated list}
+-->
 
-### 3. COMPONENTS
-- Buttons (all variants)
-- Cards (all variants)
-- Forms (inputs, selects)
-- Modals (if in profile)
-- Navigation states
+## Constraints (from CRAFT.md)
+- Spacing: only 4/8/12/16/24/32/48/64px
+- Typography: curly quotes, proper dashes, letterspacing on caps
+- Color: no pure black/white, one accent ≤10% surface
+- No: uniform shadows, same radii everywhere, decorative bloat
 
-### 4. MOTION SHOWCASE
-Demonstrate the key motion effects:
-- A scroll-triggered section with working parallax or reveals
-- Hover states on all interactive elements
-- Any ambient animations running
-- Loading/entrance animations
+## Before Submit
+1. Squint test — hierarchy obvious?
+2. Removal pass — nothing unnecessary?
+3. Anti-AI check — no generic patterns?
+4. Real content check — no placeholder text?
 
-### 5. LAYOUT WIREFRAME
-Box diagram showing DNA structure.
-
-## Realistic Content
-
-**Use actual images, not placeholders.** Sources:
-- Screenshots from the user's running app (captured during discovery)
-- Relevant images from the web (Unsplash, product photos, etc.)
-- Images from the app's existing assets
-
-Content should match the app type:
-- For e-commerce: real product photos, prices, cart
-- For dashboard: realistic metrics, charts, data
-- For portfolio: actual project images, case studies
-- For social: realistic posts, profile photos, interactions
-
-**Never use:** gray boxes, "placeholder" text, or generic colored rectangles for images.
-
-## DO NOT
-
-- Create multiple files
-- Use framework-specific templates yet
-- Reference external CSS/JS (except fonts)
-- Implement real functionality
-- Use different colors than specified
-- Use different layout than DNA specifies
-
-## Output Summary
-
-Return:
-- Theme name
-- Layout DNA code
-- Color palette name
-- References cited
-- File path
-- Aesthetic description
+Return: theme name, DNA, palette name, references, file path
 ```
 
-### Wild Mode Additions
+### Wild Mode Addition
 
-When `--wild` flag is used, add to the prompt:
+Add when `--wild` flag used:
 
 ```
-## WILD MODE ACTIVE
+## WILD MODE
 
-### MANDATORY — ALL OF THESE:
+MANDATORY:
+- Data as theater (dossier, wanted poster, medical chart)
+- Detail pages: D1 banned, use D6/D8/D9 or thematic
+- Navigation: NOT a nav bar (file tabs, channels, terminal)
+- Lists: NOT tables (police blotter, flight board, chat log)
 
-1. **Data Presentation** — Theatrical, NOT plain text:
-   - Dossier, character sheet, wanted poster, medical record
+TECHNIQUES: Rotated sections (5-15°), overlapping layers, scale extremes (72pt/8px), mixed fonts, textures.
 
-2. **Detail Page** — D1 is BANNED:
-   - D6, D8, D9, or thematic (evidence bag, specimen jar)
-
-3. **Navigation** — NOT a nav bar:
-   - File tabs, TV channels, terminal commands
-
-4. **List Pages** — NOT tables:
-   - Police blotter, flight board, chat log
-
-### WILD TECHNIQUES — USE SEVERAL:
-- Rotated sections (5-15° angles)
-- Overlapping, layered elements
-- 72pt headlines, 8px labels
-- Mixed fonts in headlines
-- Textures, stains, wear marks
-
-The goal: someone sees this and says "what the hell?" — then discovers it actually works.
+Read CRAFT.md "Wild Mode" section for intentional rule-breaking.
 ```
 
 ---
