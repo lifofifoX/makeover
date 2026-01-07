@@ -52,25 +52,17 @@ Proposals show exactly how themes look on your actual app, not mock content.
 
 | File | Purpose | When to Read |
 |------|---------|--------------|
-| `SKILL.md` | This file — commands and overview | Always |
-| `CRAFT.md` | Elite design principles, anti-AI patterns | Before normal proposals |
-| `WILD_CRAFT.md` | Permission-first wild philosophy | **Before --wild proposals** |
-| `PROPOSE.md` | Proposal requirements, agent prompts | Before proposing |
-| `IMPLEMENT.md` | Implementation patterns, checklists | Before implementing |
-| `LIBRARY.md` | DNA options, palettes, archetypes | During proposal ideation |
-| `MOTION.md` | Scroll effects, animations, interactions | When designing motion |
+| `SKILL.md` | Commands and overview | Always |
+| `CRAFT.md` | Elite design principles | Normal proposals |
+| `WILD_CRAFT.md` | Permission-first wild philosophy | `--wild` proposals (replaces CRAFT.md) |
+| `PROPOSE.md` | Workflow, templates, banned patterns | Before proposing |
+| `LIBRARY.md` | DNA tables, 130+ palettes, references | During ideation |
+| `MOTION.md` | Effect catalog, implementation | Only if N3+ motion |
+| `IMPLEMENT.md` | Implementation patterns | Before implementing |
 
-### Reading Order by Mode
+## Presets
 
-**Normal proposals:** CRAFT.md → PROPOSE.md → LIBRARY.md → MOTION.md
-
-**Wild proposals (`--wild`):** WILD_CRAFT.md → PROPOSE.md § Wild Mode → LIBRARY.md § Wild Concepts
-
-Wild mode uses WILD_CRAFT.md instead of CRAFT.md. The wild litmus test ("Would a client say 'this is too weird'? If NO → not wild enough") takes priority.
-
-## Semantic Presets
-
-Quick-start presets that expand to DNA internally (now includes motion level):
+Expand to DNA codes (H-L-G-D-C-N):
 
 | Preset | DNA | Description |
 |--------|-----|-------------|
@@ -84,9 +76,7 @@ Quick-start presets that expand to DNA internally (now includes motion level):
 | `immersive` | H8-L7-G7-D8-C5-N7 | Cinematic, scroll-driven, dramatic page transitions |
 | `chaotic` | H9-L9-G8-D6-C11-N9 | Glitch effects, screen shake, unpredictable |
 
-Use presets: `/makeover propose 3 --preset editorial`
-
-Or combine with inspiration: `/makeover propose 2 --preset saas "stripe" "linear"`
+Usage: `/makeover propose 3 --preset editorial` or `/makeover propose 2 --preset saas "stripe"`
 
 ## Inspiration Hints
 
@@ -122,30 +112,3 @@ tmp/makeover/themes/
 └── ...
 ```
 
-## Key Advantages
-
-| Aspect | Traditional Theming | Makeover |
-|--------|---------------------|----------|
-| Content | Mock/placeholder data | Your actual app UI |
-| Pages | Manual enumeration | Auto-detected via Playwright |
-| Styling | Assumes specific system | Detects & adapts (Tailwind, CSS modules, etc.) |
-| Framework | Framework-specific | Framework-agnostic |
-
-## Quick Start
-
-```bash
-# Start your app, then propose themes
-/makeover propose 3 "minimal" "dark"
-# → Asks for app URL, browses with Playwright
-# → Asks which pages to include
-# → Generates proposals using your real UI
-
-# Or go wild
-/makeover propose 2 --wild "vaporwave"
-
-# Open previews, pick favorites
-open tmp/makeover/themes/index.html
-
-# Implement approved theme
-/makeover implement chosen-theme-name
-```
