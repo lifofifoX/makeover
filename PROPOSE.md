@@ -90,6 +90,7 @@ These archetypes are generated too frequently across projects. **Avoid defaultin
 - **Mission Control/NASA** — telemetry, countdown timers
 - **Zine/Punk** — xerox textures, cut-out collage
 - **Medical Records/Clinical** — clipboard aesthetic, diagnosis forms
+- **Arcade/Casino** — neon lights, slot machine aesthetics, pixel fonts (especially in wild mode)
 
 **Instead:** Explore the full LIBRARY.md — there are 50+ archetypes. Pick unexpected combinations. If your first instinct is one of the above, force yourself to choose something else.
 
