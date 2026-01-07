@@ -32,13 +32,15 @@ Makeover is a skill for redesigning applications with distinctive, production-gr
 
 | Phase | Read First |
 |-------|------------|
-| Propose | CRAFT.md, PROPOSE.md, LIBRARY.md, MOTION.md |
+| Propose (normal) | CRAFT.md, PROPOSE.md, LIBRARY.md, MOTION.md |
+| Propose (--wild) | WILD_CRAFT.md, PROPOSE.md § Wild Mode, LIBRARY.md § Wild Concepts |
 | Implement | IMPLEMENT.md, proposal HTML metadata |
 
 ## Key Files
 
 - `SKILL.md` — Full workflow, presets, inspiration hints
-- `CRAFT.md` — **Elite design principles** (mandatory before proposals)
+- `CRAFT.md` — Elite design principles (normal proposals)
+- `WILD_CRAFT.md` — **Permission-first wild philosophy** (--wild proposals)
 - `LIBRARY.md` — DNA tables, 130+ color palettes, typography, inspiration sources
 - `MOTION.md` — N1-N9 motion levels, effect catalog
 

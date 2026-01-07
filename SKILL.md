@@ -53,11 +53,20 @@ Proposals show exactly how themes look on your actual app, not mock content.
 | File | Purpose | When to Read |
 |------|---------|--------------|
 | `SKILL.md` | This file — commands and overview | Always |
-| `CRAFT.md` | Elite design principles, anti-AI patterns | **Before every proposal** |
+| `CRAFT.md` | Elite design principles, anti-AI patterns | Before normal proposals |
+| `WILD_CRAFT.md` | Permission-first wild philosophy | **Before --wild proposals** |
 | `PROPOSE.md` | Proposal requirements, agent prompts | Before proposing |
 | `IMPLEMENT.md` | Implementation patterns, checklists | Before implementing |
 | `LIBRARY.md` | DNA options, palettes, archetypes | During proposal ideation |
 | `MOTION.md` | Scroll effects, animations, interactions | When designing motion |
+
+### Reading Order by Mode
+
+**Normal proposals:** CRAFT.md → PROPOSE.md → LIBRARY.md → MOTION.md
+
+**Wild proposals (`--wild`):** WILD_CRAFT.md → PROPOSE.md § Wild Mode → LIBRARY.md § Wild Concepts
+
+Wild mode uses WILD_CRAFT.md instead of CRAFT.md. The wild litmus test ("Would a client say 'this is too weird'? If NO → not wild enough") takes priority.
 
 ## Semantic Presets
 
