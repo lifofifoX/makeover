@@ -59,7 +59,8 @@ Makeover is a skill for redesigning applications with distinctive, production-gr
 
 **Proposals Must**:
 - Cite 2-3 specific references from LIBRARY.md
-- Use REAL app content (no placeholders)
+- Use REAL app content (no placeholders, no emoji substitutes)
+- Use REAL images from app (or realistic images from internet if app has none)
 - Embed MAKEOVER_METADATA comment for implementation
 - Differ by ≥3 DNA positions if multiple
 - Pass squint test (hierarchy obvious when blurred)

@@ -627,7 +627,8 @@ Single file: tmp/makeover/themes/{name}.html
 
 ## Content Rules
 - Use ACTUAL text/headings from captured pages
-- Use ACTUAL image URLs from the app (or Unsplash if none exist)
+- Use ACTUAL image URLs from the app — no emoji substitutes, no placeholder.com
+- If the app has no images, find realistic images from the internet that fit the content context
 - Preserve ACTUAL navigation structure
 - Never use placeholder text like "Lorem ipsum" or "User Name"
 
@@ -652,7 +653,8 @@ pages: {comma-separated list}
 1. Squint test — hierarchy obvious?
 2. Removal pass — nothing unnecessary?
 3. Anti-AI check — no generic patterns?
-4. Real content check — no placeholder text?
+4. Real content check — no placeholder text, no emoji substitutes?
+5. Real images check — images from app, or realistic internet images that fit context (never emoji, never placeholder.com)?
 
 Return: theme name, DNA, palette name, references, file path
 ```
@@ -727,11 +729,16 @@ After all proposals complete, generate:
     .card-preview {
       aspect-ratio: 16/10;
       background: #f0f0f0;
+      position: relative;
+      overflow: hidden;
     }
-    .card-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .card-preview iframe {
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none; /* Allows clicks to pass through to card link */
     }
     .card-body {
       padding: 1.25rem;
@@ -762,7 +769,7 @@ After all proposals complete, generate:
     <!-- Repeat for each proposal — entire card is clickable -->
     <a href="[name].html" class="card">
       <div class="card-preview">
-        <img src="[screenshot or representative image from proposal]" alt="[Theme Name] preview">
+        <iframe src="[name].html" title="[Theme Name] preview" loading="lazy"></iframe>
       </div>
       <div class="card-body">
         <h2 class="card-title">[Theme Name]</h2>
