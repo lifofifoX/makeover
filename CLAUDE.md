@@ -30,11 +30,13 @@ Makeover is a skill for redesigning applications with distinctive, production-gr
 
 ## File Reading Order
 
-| Phase | Read First |
-|-------|------------|
-| Propose (normal) | CRAFT.md, PROPOSE.md, LIBRARY.md, MOTION.md |
-| Propose (--wild) | WILD_CRAFT.md, PROPOSE.md § Wild Mode, LIBRARY.md § Wild Concepts |
-| Implement | IMPLEMENT.md, proposal HTML metadata |
+| Phase | Always Read | Conditional |
+|-------|-------------|-------------|
+| Propose (normal) | CRAFT.md, PROPOSE.md, LIBRARY.md | MOTION.md (if N3+ motion) |
+| Propose (--wild) | WILD_CRAFT.md, PROPOSE.md, LIBRARY.md § Wild Concepts | MOTION.md (if N3+ motion) |
+| Implement | IMPLEMENT.md, proposal HTML | — |
+
+**Context Note:** CRAFT.md is the single source for design rules. PROPOSE.md references but does not duplicate.
 
 ## Key Files
 
@@ -56,6 +58,8 @@ Makeover is a skill for redesigning applications with distinctive, production-gr
 - Anti-AI: no uniform shadows, same radii everywhere, decorative bloat
 
 **Banned Patterns**: Inter font, blue accents, generic card grids, top-bar + logo left/links right
+
+**Banned Themes (Tier 1 — never default to)**: Brutalist, Terminal/Hacker, NASA/Mission Control, Zine/Punk, Medical/Clinical, Arcade/Casino. See PROPOSE.md for full tiered list.
 
 **Proposals Must**:
 - Cite 2-3 specific references from LIBRARY.md

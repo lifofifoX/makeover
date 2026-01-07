@@ -122,18 +122,49 @@ Everything else is fair game.
 - **Navigation as metaphor**: File tabs, TV channels, elevator buttons, radio dials
 - **Tables as documents**: Police blotter, medical chart, telegram, ship's log
 
+### Structural Extremes
+- **No rectangles**: Everything circular, organic, blob-shaped
+- **Reverse z-index**: Important content behind, trivial content foremost
+- **Negative space dominance**: 80%+ empty, content as punctuation
+- **Information archaeology**: Layers peeled back, revealing "underneath"
+- **Physical simulation**: Paper tears, tape, staples, coffee stains, cigarette burns
+- **Institutional horror**: Fluorescent lighting feel, linoleum colors, waiting room dread
+
+### Temporal Distortion
+- **Time decay**: Interface appears to age/corrupt as you scroll
+- **Memory glitch**: Elements repeat, stutter, leave afterimages
+- **Fast-forward**: Content appears sped-up, streaking
+- **Freeze frame**: Moments suspended, VCR pause artifacts
+
+### Sensory Translation
+- **Synesthesia**: Sound visualized as color, touch as texture
+- **Temperature**: Hot interfaces (red, sweat, shimmer) vs cold (blue, frost, static)
+- **Tactile**: Sandpaper grain, wet surface, oily residue feel
+- **Olfactory hint**: Visual cues suggesting smell (smoke, perfume, decay)
+
 ---
 
 ## Anti-Patterns (Even in Wild Mode)
 
-These specific effects are overused and banned:
+These effects are overused in wild mode. **Banned:**
 
-| Banned | Why |
-|--------|-----|
-| **Horizontal scan line** (animated line scrolling top-to-bottom) | Cliché CRT effect |
-| **Full-screen glitch on load** | Predictable, overwhelming |
-| **Subtle wildness** | Defeats the purpose — go hard or go home |
-| **"A little bit of everything"** | Pick a direction and commit |
+| Banned | Why | Alternative |
+|--------|-----|-------------|
+| **Horizontal scan line** | Cliché CRT effect | Vertical interference, diagonal static |
+| **Full-screen glitch on load** | Predictable, overwhelming | Localized glitch on interaction |
+| **Subtle wildness** | Defeats the purpose | Go hard or go home |
+| **"A little bit of everything"** | No commitment | Pick ONE concept, push to extreme |
+| **Neon pink + cyan** | Cyberpunk cliché | Unexpected color clash (brown + chartreuse, mauve + orange) |
+| **Matrix-style falling code** | 1999 called | Static corruption, data visualization |
+| **VHS tracking lines** | Overused retro | Specific VHS artifacts: color bleed, head switch |
+| **Generic glitch filter** | Lazy | Hand-crafted corruption specific to concept |
+| **Hacker terminal aesthetic** | Tier 1 banned theme | Different metaphor entirely |
+| **"Corrupted file" without concept** | Generic | Specific file type: corrupted JPEG, broken PDF, damaged film |
+
+**Wild Mode Cliché Test:**
+1. Have you seen this effect on Dribbble 100+ times? → Don't use it
+2. Does this feel like a Photoshop filter? → Make it specific to your concept
+3. Is this the first "wild" idea that came to mind? → It's probably overused, pick something else
 
 ---
 

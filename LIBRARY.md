@@ -689,51 +689,13 @@ Thematic extremes for `--wild` flag proposals.
 
 ---
 
-## Motion & Animation Principles
+## Motion & Animation
 
-**For comprehensive motion documentation with code examples, see MOTION.md.**
+**See MOTION.md for all motion techniques, code examples, and implementation.**
 
-### Motion DNA Quick Reference
-
-| Level | Best For | Key Techniques |
-|-------|----------|----------------|
-| N1-N2 | Data apps, minimal | Hover states, subtle feedback |
-| N3-N4 | Editorial, e-commerce | Scroll reveals, parallax |
-| N5-N6 | Creative, interactive | Floating elements, cursor effects |
-| N7-N9 | Immersive, wild | Cinematic, glitch, chaos |
-
-### Essential Timing
-
-| Name | CSS |
-|------|-----|
-| Snap | `cubic-bezier(0.4, 0, 0.2, 1)` |
-| Gentle | `cubic-bezier(0.25, 0.1, 0.25, 1)` |
-| Bounce | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
-| Dramatic | `cubic-bezier(0.7, 0, 0.2, 1)` |
-
-### Scroll Effects Quick Start
-
-```css
-/* Parallax */
-.layer { animation: parallax linear; animation-timeline: scroll(); }
-
-/* Reveal on scroll */
-.reveal { animation: fade-up linear; animation-timeline: view(); }
-```
-
-### See MOTION.md for:
-- Multi-layer parallax systems
-- Scroll-linked transformations (scale, rotate, opacity)
-- Sticky with progression effects
-- Horizontal scroll sections
-- Magnetic buttons and 3D tilt cards
-- Custom cursors and trails
-- Floating/breathing ambient motion
-- Particle systems
-- Film grain and scan lines
-- Typewriter and text scramble
-- Page transitions and shared element morphs
-- Glitch, shake, and corruption effects
+Motion DNA (N1-N9) is defined in the DNA tables above. MOTION.md contains:
+- Effect catalog (scroll, hover, ambient, text, 3D, page transitions, chaos)
+- CSS/JS implementation patterns
 - Performance and accessibility guidelines
 
 ---

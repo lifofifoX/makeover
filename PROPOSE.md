@@ -139,12 +139,39 @@ When generating multiple proposals:
 - Vary color temperature (warm vs cool vs neutral)
 - Vary density (minimal vs dense vs chaotic)
 
-**Example for 3 proposals:**
+**Variance Enforcement Matrix (MANDATORY):**
+
+Before finalizing proposals, verify differentiation across these axes:
+
+| Axis | Must Vary | Options |
+|------|-----------|---------|
+| **Header** | Every proposal different H-code | H1-H12 |
+| **Layout** | Every proposal different L-code | L1-L12 |
+| **Color Temperature** | At least 2 different temps | Warm / Cool / Neutral |
+| **Density** | At least 2 different levels | Minimal / Balanced / Dense |
+| **Motion** | Spread across range | Low (N1-3) / Mid (N4-6) / High (N7-9) |
+| **Era** | Mix eras | Contemporary / Retro / Timeless |
+| **Energy** | Mix energies | Calm / Dynamic / Intense |
+
+**For 3 proposals, target this distribution:**
 ```
-Proposal A: H4-L5-G2-D8-C2 (floating, magazine, 2-col, full-bleed, portrait)
-Proposal B: H1-L1-G6-D3-C1 (top bar, bio+grid, masonry, stacked, square)
-Proposal C: H8-L7-G4-D6-C4 (hidden, scroll story, list, overlay, text row)
+Proposal A: Warm temp, Minimal density, Low motion, Contemporary, Calm
+Proposal B: Cool temp, Balanced density, Mid motion, Retro influence, Dynamic
+Proposal C: Neutral temp, Dense, High motion, Timeless, Intense
 ```
+
+**DNA Example for 3 proposals:**
+```
+Proposal A: H4-L5-G2-D8-C2-N3 (floating, magazine, 2-col, full-bleed, portrait, responsive)
+Proposal B: H1-L1-G6-D3-C1-N5 (top bar, bio+grid, masonry, stacked, square, kinetic)
+Proposal C: H8-L7-G4-D6-C4-N7 (hidden, scroll story, list, overlay, text row, cinematic)
+```
+
+**Automatic Rejection Triggers:**
+- Two proposals with same H or L code
+- Two proposals from same overused tier
+- Two proposals with same color temperature
+- Three proposals all using N2-N3 motion (too safe)
 
 ---
 
@@ -152,17 +179,41 @@ Proposal C: H8-L7-G4-D6-C4 (hidden, scroll story, list, overlay, text row)
 
 These patterns appear too frequently. **Do not use unless the concept demands it:**
 
-### Overused Themes
+### Overused Themes (BANNED as Defaults)
 
-These archetypes are generated too frequently across projects. **Avoid defaulting to these:**
-- **Brutalist** — raw concrete, harsh typography
-- **Terminal/Hacker** — green-on-black, monospace everything
-- **Mission Control/NASA** — telemetry, countdown timers
-- **Zine/Punk** — xerox textures, cut-out collage
-- **Medical Records/Clinical** — clipboard aesthetic, diagnosis forms
-- **Arcade/Casino** — neon lights, slot machine aesthetics, pixel fonts (especially in wild mode)
+These archetypes are generated too frequently. **Do NOT use unless explicitly requested:**
 
-**Instead:** Explore the full LIBRARY.md — there are 50+ archetypes. Pick unexpected combinations. If your first instinct is one of the above, force yourself to choose something else.
+**Tier 1 — Severely Overused (Hard Ban):**
+- **Brutalist** — raw concrete, harsh typography, exposed structure
+- **Terminal/Hacker** — green-on-black, monospace everything, blinking cursors
+- **Mission Control/NASA** — telemetry, countdown timers, trajectory displays
+- **Zine/Punk** — xerox textures, cut-out collage, ransom note aesthetic
+- **Medical Records/Clinical** — clipboard aesthetic, diagnosis forms, vitals
+- **Arcade/Casino** — neon lights, slot machines, pixel fonts
+
+**Tier 2 — Frequently Overused (Avoid):**
+- **Cyberpunk Neon** — hot pink/cyan on black, rain, Japanese text
+- **Vaporwave** — pink/purple gradients, Roman busts, 80s geometry
+- **Film Noir** — high contrast B&W, venetian blinds, fedoras
+- **Retro Computing** — Win95/DOS nostalgia, pixel fonts, old icons
+- **Dark Mode SaaS** — purple gradients, glass cards, Linear clone
+- **Luxury Minimal** — black + gold + serif, fashion editorial clone
+- **Spotify Dark** — green accent, card grids, rounded everything
+
+**Tier 3 — Becoming Overused (Use Sparingly):**
+- **Japanese Minimal** — lots of whitespace, subtle typography, muji-like
+- **Editorial Magazine** — big serif headlines, multi-column, pull quotes
+- **Bauhaus Primary** — red/blue/yellow blocks, geometric, Mondrian-ish
+- **Gradient Mesh SaaS** — Stripe-style color blobs, purple-blue
+- **Glassmorphism** — frosted glass, blur, translucent cards
+
+**Variance Rule:** If multiple proposals, maximum ONE from Tier 2-3 across all proposals. Never two from same tier.
+
+**Instead:** LIBRARY.md has 50+ palettes and 30+ archetypes. Pick unexpected combinations:
+- Hospitality + Technical (hotel keycard meets server logs)
+- Luxury + Brutalist (Bottega meets concrete)
+- Retro + Contemporary (Kodachrome palette with Linear layout)
+- Geographic + Functional (Marrakech colors on dashboard UI)
 
 ### Layout
 - Generic 3-column card grid with uniform sizing
@@ -191,95 +242,16 @@ These archetypes are generated too frequently across projects. **Avoid defaultin
 
 ## ELITE DESIGN REQUIREMENTS
 
-These requirements separate professional-quality output from generic AI design. **Mandatory for all proposals.**
+**All requirements from CRAFT.md are mandatory.** Key rules (see CRAFT.md for details):
 
-### Spacing System (Non-Negotiable)
-
-All spacing must come from this scale. No arbitrary values.
-
-```css
---space-1: 4px;   /* micro gaps */
---space-2: 8px;   /* tight gaps */
---space-3: 12px;  /* small gaps */
---space-4: 16px;  /* default */
---space-6: 24px;  /* comfortable */
---space-8: 32px;  /* section gaps */
---space-12: 48px; /* large breaks */
---space-16: 64px; /* major divisions */
-```
-
-**Enforce:** Every `padding`, `margin`, and `gap` value must use these variables.
-
-### Typography Craft (Non-Negotiable)
-
-**Required in all proposals:**
-- Proper curly quotes (" " ' ') not straight quotes
-- En-dashes (–) for ranges, em-dashes (—) for breaks
-- Proper ellipsis (…) not three periods
-- Letterspacing on ALL CAPS text (+0.05em minimum)
-- Line-height decreases as font-size increases
-- Line lengths under 75 characters for body text
-
-**Letterspacing by context:**
-```css
-/* Headlines: tighten */
-h1, h2 { letter-spacing: -0.02em; }
-
-/* Body: default */
-p { letter-spacing: 0; }
-
-/* Small/caps: loosen */
-.label, .caps { letter-spacing: 0.05em; }
-```
-
-### Color Sophistication (Non-Negotiable)
-
-**Required:**
-- No pure `#000000` black — use `#0a0a0a`, `#0d0d0d`, or `#111111`
-- No pure `#FFFFFF` white in dark themes — use `#FAFAFA`, `#F5F5F5`
-- All neutrals share same temperature undertone (all warm OR all cool)
-- Accent color ≤10% of total surface area
-- Text contrast ratios: minimum 4.5:1 (WCAG AA)
-
-**Color role discipline:**
-```css
-/* Light theme example */
---color-bg: #FAFAF8;        /* warm white, not pure */
---color-surface: #FFFFFF;   /* cards lift off background */
---color-border: rgba(0,0,0,0.08); /* subtle, not prominent */
---color-text: #1a1a1a;      /* near-black, not pure */
---color-text-secondary: rgba(26,26,26,0.65);
---color-accent: #...;       /* used sparingly */
-```
-
-### The Anti-AI Checkpoint
-
-**Before finalizing any proposal, verify you haven't fallen into these patterns:**
-
-| Check | If You Did This... | Do This Instead |
-|-------|-------------------|-----------------|
-| Gradient backgrounds | Ask: is this serving a purpose? | Flat color unless conceptually necessary |
-| Same border-radius everywhere | Vary by element size | Large elements: 12-16px, small: 4-8px |
-| Shadows on every card | Only where depth aids hierarchy | Borders or background difference instead |
-| Hover effects on everything | Only interactive elements | Static elements stay static |
-| Multiple accent colors | Pick ONE accent | Use opacity variants if needed |
-| Decorative blobs/waves | Why is this here? | Remove unless concept demands |
-| Icons next to obvious labels | Text alone is fine | Icons only when they add clarity |
-| Rainbow/neon gradients | Sophisticated restraint | Single-hue or analogous shifts |
-
-**The Squint Test:** Blur your vision. Is hierarchy still obvious? If everything looks the same importance, your design has failed.
-
-### The Removal Pass
-
-After designing, do one pass asking only: "What can I remove?"
-
-- That border? Probably unnecessary.
-- That shadow? Does it serve hierarchy?
-- That icon? Is the label clear without it?
-- That accent color usage? Could it be less frequent?
-- That animation? Does it aid understanding?
-
-**Elite design is what remains after everything unnecessary is removed.**
+| Requirement | Rule |
+|-------------|------|
+| **Spacing** | Only 4/8/12/16/24/32/48/64px — no arbitrary values |
+| **Typography** | Curly quotes (" "), proper dashes (– —), letterspacing on caps |
+| **Color** | No pure #000/#FFF, one accent ≤10% surface, consistent neutral temperature |
+| **Anti-AI** | No: uniform shadows, same radii everywhere, gradients on everything, decorative blobs |
+| **Squint Test** | Hierarchy obvious when blurred |
+| **Removal Pass** | If it can be removed without losing function, remove it |
 
 ---
 
@@ -593,10 +565,11 @@ After proposals complete, create `tmp/makeover/themes/index.html` with links to 
 ```
 You are creating a PREVIEW PROPOSAL for a theme using REAL APP CONTENT.
 
-## Read First (All Mandatory)
-1. CRAFT.md — elite design principles
-2. LIBRARY.md — select 2-3 specific references
-3. MOTION.md — motion techniques for your N-level
+## Files to Read
+
+**Mandatory:** CRAFT.md (design rules), LIBRARY.md § Palettes/Typography (pick 1 each)
+**If N3+:** MOTION.md (scroll/animation techniques)
+**If --wild:** WILD_CRAFT.md instead of CRAFT.md
 
 ## Captured App Content
 
@@ -607,34 +580,31 @@ You are creating a PREVIEW PROPOSAL for a theme using REAL APP CONTENT.
 
 Theme: {NAME}
 DNA: {H#-L#-G#-D#-C#-N#}
-References: {cite 2-3 from LIBRARY.md}
+References: {cite 2-3 SPECIFIC items from LIBRARY.md — not categories}
 Palette: {name} with 5-7 colors (no pure #000/#FFF)
 Styling System: {detected: Tailwind/CSS Modules/vanilla}
 
 ## Output
 
-Single file: tmp/makeover/themes/{name}.html
+File: tmp/makeover/themes/{name}.html
 - All CSS in <style>, fonts via Google CDN only
 - Invoke frontend-design plugin first
-- Embed metadata for implementation (see below)
 
 ## Required Sections
 1. Theme header (name, DNA, references)
 2. Color palette with swatches and story
-3. Each captured page with REAL content (not mock data)
+3. Each captured page with REAL content
 4. Components (buttons, cards, forms, modals)
-5. Motion showcase (working scroll/hover effects)
+5. Motion showcase (if N3+)
 
-## Content Rules
-- Use ACTUAL text/headings from captured pages
-- Use ACTUAL image URLs from the app — no emoji substitutes, no placeholder.com
-- If the app has no images, find realistic images from the internet that fit the content context
-- Preserve ACTUAL navigation structure
-- Never use placeholder text like "Lorem ipsum" or "User Name"
+## Content Rules (CRITICAL)
+- ACTUAL text from captured pages — no "Lorem ipsum"
+- ACTUAL image URLs from app — no emoji, no placeholder.com
+- If no images in app: realistic internet images fitting context
+- ACTUAL navigation structure
 
-## Embed Implementation Metadata
+## Embed Metadata (Top of HTML)
 
-Include this comment block at the top of the HTML:
 <!--
 MAKEOVER_METADATA
 theme: {name}
@@ -643,18 +613,12 @@ styling_system: {Tailwind|CSS Modules|vanilla}
 pages: {comma-separated list}
 -->
 
-## Constraints (from CRAFT.md)
-- Spacing: only 4/8/12/16/24/32/48/64px
-- Typography: curly quotes, proper dashes, letterspacing on caps
-- Color: no pure black/white, one accent ≤10% surface
-- No: uniform shadows, same radii everywhere, decorative bloat
-
-## Before Submit
-1. Squint test — hierarchy obvious?
-2. Removal pass — nothing unnecessary?
-3. Anti-AI check — no generic patterns?
-4. Real content check — no placeholder text, no emoji substitutes?
-5. Real images check — images from app, or realistic internet images that fit context (never emoji, never placeholder.com)?
+## Quality Gates (All Must Pass)
+1. Squint test — hierarchy obvious when blurred?
+2. Removal pass — nothing can be removed?
+3. Anti-AI check — no generic shadows/gradients/radii?
+4. Real content — no placeholders, no emoji substitutes?
+5. Banned themes — not in Tier 1, max 1 from Tier 2-3?
 
 Return: theme name, DNA, palette name, references, file path
 ```
