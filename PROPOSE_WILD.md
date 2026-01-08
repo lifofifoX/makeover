@@ -42,6 +42,7 @@ Wild mode exists to produce designs that **question the fundamental assumptions 
 - [ ] **NOT the same user journey** with wild visuals
 
 ### Standard Requirements
+- [ ] **NOT an overused concept** — no conspiracy board, evidence locker, fortune teller, arcade cabinet, specimen, escape room
 - [ ] **Color palette** with evocative name, 5-7 colors, color story
 - [ ] **2-3 specific references cited**
 - [ ] **All captured content shown** (can be restructured)
@@ -222,6 +223,16 @@ Everything else is fair game.
 | Neon pink + cyan | Cyberpunk cliché | Unexpected color clash |
 | Matrix falling code | 1999 called | Static corruption, data viz |
 | Generic glitch filter | Lazy | Hand-crafted corruption specific to concept |
+
+### Overused Concepts (Do Not Use)
+These are first-instinct defaults. Pick something else.
+
+- **Conspiracy Board** — red string, polaroids, "connecting the dots"
+- **Evidence Locker** — police evidence bags, case numbers, chain of custody
+- **Fortune Teller** — tarot, crystal ball, mystical readings
+- **Arcade Cabinet** — pixel fonts, insert coin, high scores
+- **Specimen Display** — museum labels, scientific classification
+- **Escape Room** — puzzles, locks, clues, inventory
 
 ---
 
