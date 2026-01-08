@@ -1,44 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Makeover Proposals</title>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      padding: 3rem 2rem;
-      max-width: 1400px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 2.5rem 2rem 4rem;
+      max-width: 1600px;
       margin: 0 auto;
-      background: #fafafa;
-      color: #1a1a1a;
+      background: #f5f5f7;
+      color: #1d1d1f;
+      min-height: 100vh;
     }
-    h1 { font-size: 2rem; font-weight: 600; margin: 0 0 0.5rem; }
-    .subtitle { color: #666; margin: 0 0 2.5rem; }
+
+    header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #d2d2d7;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.375rem;
+    }
+
+    .subtitle {
+      color: #86868b;
+      font-size: 0.8125rem;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
     }
+
     .card {
-      display: block;
+      display: flex;
+      flex-direction: column;
       background: #fff;
-      border: 1px solid #e5e5e5;
       border-radius: 12px;
       overflow: hidden;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
     }
+
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.06);
     }
+
+    .card:active {
+      transform: translateY(0);
+      transition-duration: 0.05s;
+    }
+
     .card-preview {
       aspect-ratio: 16/10;
-      background: #f0f0f0;
+      background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid #f0f0f0;
     }
+
     .card-preview iframe {
       width: 200%;
       height: 200%;
@@ -47,27 +79,76 @@
       border: none;
       pointer-events: none;
     }
-    .card-body { padding: 1.25rem; }
-    .card-title { font-size: 1.125rem; font-weight: 600; margin: 0 0 0.5rem; }
-    .card-meta { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin: 0 0 0.75rem; }
-    .card-desc { font-size: 0.875rem; color: #555; margin: 0; line-height: 1.5; }
+
+    .card-body {
+      padding: 1rem 1.125rem 1.125rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.375rem;
+    }
+
+    .card-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .card-meta {
+      font-family: ui-monospace, 'SF Mono', Monaco, monospace;
+      font-size: 0.6875rem;
+      color: #86868b;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.8125rem;
+      color: #6e6e73;
+      line-height: 1.45;
+      flex: 1;
+    }
+
     .badge {
-      display: inline-block;
-      padding: 0.125rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.625rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+      font-size: 0.5625rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-left: 0.5rem;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
     }
-    .badge-normal { background: #e8e8e8; color: #666; }
-    .badge-wild { background: #ff6b6b; color: white; }
+
+    .badge-normal {
+      background: #f5f5f7;
+      color: #86868b;
+    }
+
+    .badge-wild {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 1.5rem 1rem 3rem; }
+      .grid { grid-template-columns: 1fr; gap: 1rem; }
+      h1 { font-size: 1.5rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>Makeover Proposals</h1>
-  <p class="subtitle">Generated: [timestamp] · Click any card to view full preview</p>
+  <header>
+    <h1>Makeover Proposals</h1>
+    <p class="subtitle">Generated: [timestamp]</p>
+  </header>
+
   <div class="grid">
     <!-- Repeat for each proposal -->
     <a href="[name].html" class="card">
@@ -75,10 +156,10 @@
         <iframe src="[name].html" title="[Theme Name] preview" loading="lazy"></iframe>
       </div>
       <div class="card-body">
-        <h2 class="card-title">
-          [Theme Name]
+        <div class="card-header">
+          <h2 class="card-title">[Theme Name]</h2>
           <span class="badge badge-[mode]">[mode]</span>
-        </h2>
+        </div>
         <p class="card-meta">DNA: [code] · Refs: [references]</p>
         <p class="card-desc">[Brief description]</p>
       </div>

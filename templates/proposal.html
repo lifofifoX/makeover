@@ -14,13 +14,23 @@ references: {ref1}, {ref2}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{Theme Name} - Makeover Proposal</title>
-  <style>/* Your styles */</style>
+  <style>
+    /* ─────────────────────────────────────────────────────────────
+       MINIMAL RESET - Override freely in your theme styles below
+       ───────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+
+    /* ─────────────────────────────────────────────────────────────
+       YOUR THEME STYLES GO HERE
+       ───────────────────────────────────────────────────────────── */
+  </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 1: THEME HEADER (REQUIRED)
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- ┌─────────────────────────────────────────────────────────────┐
+       │ SECTION 1: THEME HEADER                                     │
+       └─────────────────────────────────────────────────────────────┘ -->
   <header class="theme-header">
     <h1>{Theme Name}</h1>
     <p class="tagline">{One-line concept}</p>
@@ -28,9 +38,9 @@ references: {ref1}, {ref2}
     <p class="references">Inspired by: {2-3 specific references}</p>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 2: COLOR PALETTE (REQUIRED)
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- ┌─────────────────────────────────────────────────────────────┐
+       │ SECTION 2: COLOR PALETTE                                    │
+       └─────────────────────────────────────────────────────────────┘ -->
   <section class="color-palette">
     <h2>Color Palette: {Evocative Name}</h2>
     <p class="color-story">{One sentence explaining mood and origin}</p>
@@ -43,23 +53,22 @@ references: {ref1}, {ref2}
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 3: APP CONTENT (REQUIRED)
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- ┌─────────────────────────────────────────────────────────────┐
+       │ SECTION 3: APP CONTENT                                      │
+       └─────────────────────────────────────────────────────────────┘ -->
   <section class="app-content">
     <h2>App Preview</h2>
-    <!--
-      Your themed redesign of the captured app pages goes here.
-      Use REAL content from tmp/makeover/capture/*.snapshot files.
-    -->
+    <!-- Your themed redesign of the captured app pages goes here.
+         Use REAL content from tmp/makeover/capture/*.snapshot files. -->
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 4: UI ELEMENTS (REQUIRED)
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- ┌─────────────────────────────────────────────────────────────┐
+       │ SECTION 4: UI ELEMENTS                                      │
+       └─────────────────────────────────────────────────────────────┘ -->
   <section class="ui-elements">
     <h2>UI Elements</h2>
 
+    <!-- Buttons -->
     <h3>Buttons</h3>
     <div class="button-group">
       <button class="btn-primary">Primary</button>
@@ -69,6 +78,7 @@ references: {ref1}, {ref2}
       <button class="btn-primary" disabled>Disabled</button>
     </div>
 
+    <!-- Inputs -->
     <h3>Inputs</h3>
     <div class="input-group">
       <input type="text" placeholder="Text input">
@@ -80,6 +90,7 @@ references: {ref1}, {ref2}
       <label class="toggle"><input type="checkbox"><span></span> Toggle</label>
     </div>
 
+    <!-- Cards -->
     <h3>Cards</h3>
     <div class="card-group">
       <div class="card">
@@ -89,6 +100,7 @@ references: {ref1}, {ref2}
       </div>
     </div>
 
+    <!-- Alerts -->
     <h3>Alerts</h3>
     <div class="alert-group">
       <div class="alert alert-success">Success message</div>
@@ -97,6 +109,7 @@ references: {ref1}, {ref2}
       <div class="alert alert-info">Info message</div>
     </div>
 
+    <!-- Modal -->
     <h3>Modal</h3>
     <div class="modal-demo">
       <div class="modal-overlay"></div>
@@ -110,11 +123,13 @@ references: {ref1}, {ref2}
       </div>
     </div>
 
+    <!-- Loading -->
     <h3>Loading</h3>
     <div class="loading-group">
       <div class="spinner"></div>
     </div>
 
+    <!-- Empty State -->
     <h3>Empty State</h3>
     <div class="empty-state">
       <p>No items found</p>
@@ -122,15 +137,13 @@ references: {ref1}, {ref2}
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 5: MOTION SHOWCASE (REQUIRED if N3+ or has animations)
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- ┌─────────────────────────────────────────────────────────────┐
+       │ SECTION 5: MOTION SHOWCASE (if N3+ or has animations)       │
+       └─────────────────────────────────────────────────────────────┘ -->
   <section class="motion-showcase">
     <h2>Motion & Interactions</h2>
     <p>Hover, click, and interact with elements below to see animations.</p>
-    <!--
-      Demo your hover effects, transitions, scroll animations here.
-    -->
+    <!-- Demo your hover effects, transitions, scroll animations here. -->
   </section>
 
 </body>
