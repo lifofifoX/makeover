@@ -260,17 +260,41 @@ Task(
   subagent_type="general-purpose",
   description="Propose {name} theme",
   prompt="""
-Read PROPOSE_{mode}.md for complete guidance.
+You are creating a theme proposal. This is a STRUCTURED PROCESS, not freeform creative work.
 
-Your assignment:
-- Theme name: {name}
-- Mode: {normal|wild}
-- Read captures from: tmp/makeover/capture/
-- Read your constraints from: tmp/makeover/constraints.json
+## STEP 1: Read Required Files (MANDATORY)
+
+Read these files IN ORDER before doing anything else:
+1. PROPOSE_{mode}.md — contains checklist you MUST complete
+2. tmp/makeover/capture/manifest.json — pages, styling system
+3. tmp/makeover/capture/*.snapshot — real DOM content for each page
+4. tmp/makeover/constraints.json — your assigned variance constraints
+
+## STEP 2: Complete Pre-Submit Verification (MANDATORY)
+
+BEFORE generating any code, you must STATE ALOUD your verification:
+- For normal mode: Content, DNA, Palette, References, Anti-AI, Constraints checks
+- For wild mode: Structural, Decoration Test, Content, Palette, References, Banned checks
+
+The PROPOSE file has the exact verification statements. Copy them and fill in your answers.
+
+## STEP 3: Invoke frontend-design Plugin
+
+Call the frontend-design plugin BEFORE writing HTML.
+
+## STEP 4: Generate HTML
 
 Output: tmp/makeover/themes/{name}.html
 
-Invoke frontend-design plugin before generating HTML.
+Your assignment:
+- Theme name: {name}
+- Mode: {mode}
+- Constraints: Read from tmp/makeover/constraints.json
+
+## CRITICAL: Do Not Skip Steps
+
+If you generate HTML without completing the verification statements, you have failed.
+The verification proves you read the captures and constraints.
 """
 )
 ```
@@ -290,14 +314,14 @@ agents = [
 
 ### What Agents Read
 
-| File | Purpose |
-|------|---------|
-| PROPOSE_NORMAL.md or PROPOSE_WILD.md | Mode-specific guidance |
-| tmp/makeover/capture/manifest.json | Pages, styling system |
-| tmp/makeover/capture/{page}.snapshot | DOM content |
-| tmp/makeover/constraints.json | Assigned variance constraints |
-| DESIGN_SYSTEM.md | Optional: detailed scales |
-| MOTION.md | If N3+ motion level |
+| File | Purpose | Required |
+|------|---------|----------|
+| PROPOSE_NORMAL.md or PROPOSE_WILD.md | Checklist, requirements | Yes |
+| tmp/makeover/capture/manifest.json | Pages, styling system | Yes |
+| tmp/makeover/capture/{page}.snapshot | Real DOM content | Yes |
+| tmp/makeover/constraints.json | Assigned variance constraints | Yes |
+| DESIGN_SYSTEM.md | Detailed DNA/scale definitions | If needed |
+| MOTION.md | Animation implementation | If N3+ |
 
 ---
 
