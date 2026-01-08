@@ -4,7 +4,7 @@ Project guidance for Claude Code.
 
 ## Overview
 
-Makeover is a skill for redesigning applications with distinctive, production-grade visual themes. It browses your running app, captures real UI, and generates theme proposals showing exactly how themes look on your actual content.
+Makeover redesigns applications with distinctive, production-grade visual themes. It browses your running app, captures real UI, and generates theme proposals showing exactly how themes look on your actual content.
 
 ## Dependencies
 
@@ -15,62 +15,78 @@ Makeover is a skill for redesigning applications with distinctive, production-gr
 
 ```
 /makeover propose [count] [hints...]   # Browse app, generate proposals
-/makeover propose [count] --wild       # Experimental themes
+/makeover propose [count] --wild       # Experimental themes (structural transformation)
 /makeover implement [names]            # Implement approved theme
 ```
 
+## File Structure
+
+```
+CLAUDE.md              # This file — routing and overview
+SKILL.md               # User-facing skill definition
+CAPTURE.md             # Playwright workflow (orchestrator only)
+PROPOSE_NORMAL.md      # Complete normal mode guide (agents read this)
+PROPOSE_WILD.md        # Complete wild mode guide (agents read this)
+IMPLEMENT.md           # Implementation workflow
+MOTION.md              # Motion catalog (if N3+ motion)
+```
+
+## Reading Order
+
+| Role | Phase | Read |
+|------|-------|------|
+| Orchestrator | Capture | CAPTURE.md |
+| Agent | Normal proposal | PROPOSE_NORMAL.md only |
+| Agent | Wild proposal | PROPOSE_WILD.md only |
+| Agent | If N3+ motion | + MOTION.md |
+| Agent | Implementation | IMPLEMENT.md |
+
+**Key principle:** Each proposal agent reads ONE file that contains everything needed.
+
 ## Workflow
 
-1. Ask for app URL (default: localhost:3000)
-2. Browse with Playwright, discover pages
-3. Ask user which pages to include (AskUserQuestion)
-4. Capture real DOM/content from each page
-5. Detect styling system inline
-6. Generate proposals using actual app content
+### Orchestrator
+1. Read CAPTURE.md
+2. Ask for app URL (default: localhost:3000)
+3. Browse with Playwright, discover pages
+4. Ask user which pages to include (AskUserQuestion)
+5. Capture real DOM/content from each page
+6. Detect styling system
+7. Spawn proposal agents in parallel, passing captured content
 
-## File Reading Order
+### Proposal Agents
+1. Read PROPOSE_NORMAL.md OR PROPOSE_WILD.md (one file only)
+2. Read MOTION.md if N3+ motion
+3. Generate proposal HTML with real app content
+4. Save to tmp/makeover/themes/{name}.html
 
-| Phase | Always Read | Conditional |
-|-------|-------------|-------------|
-| Propose (normal) | CRAFT.md, PROPOSE.md, LIBRARY.md | MOTION.md (if N3+ motion) |
-| Propose (--wild) | WILD_CRAFT.md, PROPOSE.md, LIBRARY.md § Wild Concepts | MOTION.md (if N3+ motion) |
-| Implement | IMPLEMENT.md, proposal HTML | — |
-
-**Context Note:** CRAFT.md is the single source for design rules. PROPOSE.md references but does not duplicate.
-
-## Key Files
-
-- `SKILL.md` — Full workflow, presets, inspiration hints
-- `CRAFT.md` — Elite design principles (normal proposals)
-- `WILD_CRAFT.md` — **Permission-first wild philosophy** (--wild proposals)
-- `LIBRARY.md` — DNA tables, 130+ color palettes, typography, inspiration sources
-- `MOTION.md` — N1-N9 motion levels, effect catalog
+### Post-Proposal (Orchestrator)
+1. Generate index.html linking all proposals
+2. Report: "Open tmp/makeover/themes/index.html to compare"
 
 ## Critical Constraints
 
-**DNA System**: Every theme declares `H#-L#-G#-D#-C#-N#` (see LIBRARY.md for options)
-
-**Elite Design (CRAFT.md)**:
+### Normal Mode
+- DNA required: `H#-L#-G#-D#-C#-N#`
 - Spacing: only 4/8/12/16/24/32/48/64px
-- No pure #000/#FFF (use #0a0a0a, #FAFAFA)
-- Typography: curly quotes (" "), proper dashes (– —), letterspacing on caps
+- No pure #000/#FFF
 - One accent color, ≤10% of surface
-- Anti-AI: no uniform shadows, same radii everywhere, decorative bloat
+- Pass squint test, removal test, anti-AI check
 
-**Banned Patterns**: Inter font, blue accents, generic card grids, top-bar + logo left/links right
+### Wild Mode
+- **Structural transformation required** — visual wild alone is not enough
+- DNA optional: use `DNA: FREEFORM` or declare custom structure
+- Must transform at least one of: pages, navigation, hierarchy, interaction
+- FORBIDDEN: same page structure with different skin
 
-**Banned Themes (Tier 1 — never default to)**: Brutalist, Terminal/Hacker, NASA/Mission Control, Zine/Punk, Medical/Clinical, Arcade/Casino. See PROPOSE.md for full tiered list.
+### Both Modes
+- Real app content only (no placeholders)
+- Real images from app (or realistic internet images)
+- Cite 2-3 specific references
+- Embed MAKEOVER_METADATA comment
 
-**Proposals Must**:
-- Cite 2-3 specific references from LIBRARY.md
-- Use REAL app content (no placeholders, no emoji substitutes)
-- Use REAL images from app (or realistic images from internet if app has none)
-- Embed MAKEOVER_METADATA comment for implementation
-- Differ by ≥3 DNA positions if multiple
-- Pass squint test (hierarchy obvious when blurred)
-- Pass removal test (nothing unnecessary)
+## Banned Patterns
 
-**Implementation Must**:
-- Extract metadata from proposal HTML
-- Copy CSS directly from proposal's `<style>` tags
-- Match preview exactly
+**Themes (never default to):** Brutalist, Terminal/Hacker, NASA/Mission Control, Zine/Punk, Medical/Clinical, Arcade/Casino
+
+**Elements:** Inter font, blue accents, generic card grids, top-bar + logo left/links right

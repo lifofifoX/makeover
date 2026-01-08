@@ -53,12 +53,13 @@ Proposals show exactly how themes look on your actual app, not mock content.
 | File | Purpose | When to Read |
 |------|---------|--------------|
 | `SKILL.md` | Commands and overview | Always |
-| `CRAFT.md` | Elite design principles | Normal proposals |
-| `WILD_CRAFT.md` | Permission-first wild philosophy | `--wild` proposals (replaces CRAFT.md) |
-| `PROPOSE.md` | Workflow, templates, banned patterns | Before proposing |
-| `LIBRARY.md` | DNA tables, 130+ palettes, references | During ideation |
+| `CAPTURE.md` | Playwright capture workflow | Orchestrator only |
+| `PROPOSE_NORMAL.md` | Complete normal mode guide | Normal proposal agents |
+| `PROPOSE_WILD.md` | Complete wild mode guide | Wild proposal agents |
 | `MOTION.md` | Effect catalog, implementation | Only if N3+ motion |
 | `IMPLEMENT.md` | Implementation patterns | Before implementing |
+
+**Key principle:** Each proposal agent reads ONE file (PROPOSE_NORMAL.md or PROPOSE_WILD.md) that contains everything needed — DNA, palettes, typography, archetypes, templates.
 
 ## Presets
 
