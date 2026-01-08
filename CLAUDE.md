@@ -12,8 +12,8 @@ Routing guide for makeover skill. **Do not duplicate content from other files he
 | Role | Phase | Read |
 |------|-------|------|
 | Orchestrator | Capture & Planning | CAPTURE.md |
-| Agent | Normal proposal | PROPOSE_NORMAL.md, captures from tmp/makeover/capture/ |
-| Agent | Wild proposal | PROPOSE_WILD.md, captures from tmp/makeover/capture/ |
+| Agent | Normal proposal | TEMPLATE.md, PROPOSE_NORMAL.md, captures from tmp/makeover/capture/ |
+| Agent | Wild proposal | TEMPLATE.md, PROPOSE_WILD.md, captures from tmp/makeover/capture/ |
 | Agent | Needs DNA/scale details | + DESIGN_SYSTEM.md |
 | Agent | N3+ motion | + MOTION.md |
 | Agent | Implementation | IMPLEMENT.md |
@@ -55,8 +55,8 @@ tmp/makeover/
 
 ## Both Modes
 
+- **Follow TEMPLATE.md structure exactly** — all 5 sections required
 - Real app content only (no placeholders)
 - Real images from app (or realistic internet images)
 - Cite 2-3 specific references
 - Embed MAKEOVER_METADATA comment
-- Complete Pre-Submit Verification before writing HTML
