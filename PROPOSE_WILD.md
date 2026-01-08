@@ -45,6 +45,7 @@ Wild mode exists to produce designs that **question the fundamental assumptions 
 - [ ] **Color palette** with evocative name, 5-7 colors, color story
 - [ ] **2-3 specific references cited**
 - [ ] **All captured content shown** (can be restructured)
+- [ ] **UI Elements section** — buttons, inputs, alerts, modals, loading/empty states
 - [ ] **Styling system respected** in output format
 
 ### Craft Elements (Still Apply)
@@ -225,60 +226,6 @@ Everything else is fair game.
 
 ---
 
-## Wild Visual Concepts
-
-Thematic extremes. **Combine with structural mutations.**
-
-### Institutional & Bureaucratic
-| Concept | Key Elements |
-|---------|--------------|
-| **Tax Form** | Numbered fields, stamps, fine print, penalty warnings |
-| **Police Evidence** | Evidence bags, case numbers, chain of custody |
-| **Medical Chart** | Vitals, diagnosis, prescription, clipboard |
-| **DMV Queue** | Numbered tickets, fluorescent lighting, forms |
-| **Court Filing** | Case headers, exhibits, sworn statements |
-
-### Threat & Urgency
-| Concept | Key Elements |
-|---------|--------------|
-| **Virus/Malware** | Fake errors, corrupted UI, ransom timers |
-| **Surveillance** | CCTV feeds, timestamps, tracking crosshairs |
-| **Ransom Note** | Cut-out letters, deadline timers, demands |
-| **Conspiracy Board** | String connections, polaroids, newspaper clips |
-| **Emergency Broadcast** | Color bars, warning tones, instructions |
-
-### Transit & Travel
-| Concept | Key Elements |
-|---------|--------------|
-| **Flight Dashboard** | Altimeters, radar, warning lights, HUD |
-| **Boarding Pass** | Gates, times, barcodes, seat assignments |
-| **Train Timetable** | Platform numbers, delays, connections |
-| **Cargo Manifest** | Container numbers, weights, routes |
-
-### Digital & System
-| Concept | Key Elements |
-|---------|--------------|
-| **Operating System** | Windows, icons, system preferences, dock |
-| **Stock Ticker** | Price movements, charts, alerts |
-| **Server Logs** | Timestamps, error codes, stack traces |
-| **BIOS Setup** | Blue screen, arrow navigation, warnings |
-
-### Fortune & Chance
-| Concept | Key Elements |
-|---------|--------------|
-| **Fortune Teller** | Crystal ball, tarot, palm reading |
-| **Lottery Ticket** | Numbers, scratch areas, prize tiers |
-| **Magic 8-Ball** | Floating answers, shake interface |
-
-### Domestic & Personal
-| Concept | Key Elements |
-|---------|--------------|
-| **Recipe Card** | Handwritten, stained, ingredients |
-| **Escape Room** | Clues, locks, timers, inventory |
-| **Diary Entry** | Dated pages, mood, confessions |
-
----
-
 ## Color Palettes
 
 ### Bold & High Contrast
@@ -407,7 +354,7 @@ File: tmp/makeover/themes/{name}.html
 1. Theme header (name, structure/DNA, references)
 2. Color palette with swatches and story
 3. Restructured app content (NOT same page structure)
-4. Components styled to theme
+4. **UI Elements showcase** — buttons (primary, secondary, destructive), form inputs, cards, alerts (success, error, warning, info), modals, loading states, empty states, and any app-specific components
 5. Motion/interaction showcase
 
 ## Content Rules
