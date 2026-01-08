@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Makeover Proposals</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #fafafa;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 2rem; font-weight: 600; margin: 0 0 0.5rem; }
+    .subtitle { color: #666; margin: 0 0 2.5rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      display: block;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+    .card-preview {
+      aspect-ratio: 16/10;
+      background: #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-preview iframe {
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+    }
+    .card-body { padding: 1.25rem; }
+    .card-title { font-size: 1.125rem; font-weight: 600; margin: 0 0 0.5rem; }
+    .card-meta { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin: 0 0 0.75rem; }
+    .card-desc { font-size: 0.875rem; color: #555; margin: 0; line-height: 1.5; }
+    .badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.5rem;
+    }
+    .badge-normal { background: #e8e8e8; color: #666; }
+    .badge-wild { background: #ff6b6b; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Makeover Proposals</h1>
+  <p class="subtitle">Generated: [timestamp] · Click any card to view full preview</p>
+  <div class="grid">
+    <!-- Repeat for each proposal -->
+    <a href="[name].html" class="card">
+      <div class="card-preview">
+        <iframe src="[name].html" title="[Theme Name] preview" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">
+          [Theme Name]
+          <span class="badge badge-[mode]">[mode]</span>
+        </h2>
+        <p class="card-meta">DNA: [code] · Refs: [references]</p>
+        <p class="card-desc">[Brief description]</p>
+      </div>
+    </a>
+  </div>
+</body>
+</html>

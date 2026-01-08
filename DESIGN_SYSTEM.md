@@ -1,6 +1,6 @@
 # Design System Reference
 
-Shared design foundations. **Read for detailed scales and rationale; quick references are in PROPOSE files.**
+DNA codes, spacing, typography, and color system for normal mode proposals.
 
 ---
 
@@ -95,25 +95,20 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 
 ### Motion (N1-N9)
 
-| Code | Style | Key Techniques |
-|------|-------|----------------|
-| N1 | Static | Hover colors, focus states only |
-| N2 | Subtle | Hover lifts, button feedback, smooth transitions |
-| N3 | Responsive | Fade-ins, staggered reveals, intersection-based |
-| N4 | Parallax | 2-3 layers, scroll-linked opacity/scale |
-| N5 | Kinetic | Floating elements, breathing, gradient animation |
-| N6 | Interactive | Magnetic buttons, 3D tilt, custom cursor |
-| N7 | Cinematic | Mask wipes, shared element morphs |
-| N8 | Immersive | WebGL, shaders, particle systems |
-| N9 | Chaotic | Screen shake, glitch, random triggers |
+**See MOTION.md for full definitions and implementation details.**
 
-**If N3+, also read MOTION.md for implementation details.**
+| Level | Style |
+|-------|-------|
+| N1-N2 | Static to subtle (hovers, transitions) |
+| N3-N4 | Responsive (scroll-triggered, parallax) |
+| N5-N6 | Kinetic/interactive (floating, magnetic, tilt) |
+| N7-N9 | Cinematic to chaotic (morphs, glitch, particles) |
 
 ---
 
 ## Spacing Scale
 
-**Never use arbitrary values.** Use only:
+**Use only these values. No arbitrary spacing.**
 
 | Value | Use |
 |-------|-----|
@@ -129,7 +124,6 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 **Principles:**
 - Start with too much space, remove until right
 - Related elements closer than unrelated
-- Don't fill the whole screen — 600px is fine if that's what you need
 - Fixed widths often beat fluid grids
 
 ---
@@ -149,7 +143,7 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 | 48px | Display |
 | 60px+ | Hero |
 
-### Line Height (Inversely Proportional)
+### Line Height
 
 | Text Size | Line Height |
 |-----------|-------------|
@@ -176,33 +170,19 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 
 ## Color System
 
-### Use HSL (Not Hex)
+### Use HSL
 
-**Always define colors in HSL.** It makes relationships obvious:
-- Hue: 0-360° color wheel position
-- Saturation: 0-100% intensity
-- Lightness: 0-100% brightness
+Always define colors in HSL. It makes relationships obvious:
 
 ```css
-/* HSL makes shade generation intuitive */
 --primary-500: hsl(220, 65%, 50%);  /* Base */
 --primary-400: hsl(220, 65%, 60%);  /* Lighter */
 --primary-600: hsl(220, 65%, 40%);  /* Darker */
 ```
 
-**HSL ≠ HSB.** Design tools (Figma, Sketch) use HSB. Browsers use HSL. They're different — convert carefully.
-
-### Hue Brightness
-
-Colors have inherent brightness:
-- **Bright hues:** Yellow (~60°), Cyan (~180°), Magenta (~300°)
-- **Dark hues:** Red (~0°), Blue (~240°), Green (~120°)
-
-To lighten without washing out: rotate hue ≤20-30° toward a brighter neighbor.
-
 ### Gray Temperature
 
-Never use pure gray (`hsl(0, 0%, X%)`). Add subtle saturation:
+Never use pure gray. Add subtle saturation:
 - **Warm grays:** `hsl(30, 5%, X%)` — yellow/orange tint
 - **Cool grays:** `hsl(220, 5%, X%)` — blue tint
 
@@ -211,30 +191,16 @@ Match gray temperature to your palette's dominant hue.
 ### Building a Palette
 
 1. **Pick base (500)** — works as button background, `hsl(H, S, 50%)`
-2. **Find edges**: darkest (900) for text `hsl(H, S, 15%)`, lightest (100) for tints `hsl(H, S, 95%)`
-3. **Fill gaps**: 700, 300, then 800, 600, 400, 200 — adjust lightness in ~10% steps
+2. **Find edges**: darkest (900) `hsl(H, S, 15%)`, lightest (100) `hsl(H, S, 95%)`
+3. **Fill gaps**: 700, 300, then 800, 600, 400, 200
 
-**You need more colors than you think:**
-- Grays: 8-10 shades
-- Primary: 5-10 shades
-- Accents: 5-10 shades each
+**You need:** 8-10 gray shades, 5-10 primary shades, 5-10 accent shades.
 
 ### Critical Rules
 
 - **No pure black/white:** Use `hsl(0, 0%, 10%)` and `hsl(0, 0%, 98%)`
-- **On colored backgrounds:** Use same-hue color, not gray
 - **60-30-10 rule:** 60% dominant, 30% secondary, 10% accent
 - **Accent ≤10%:** Accent colors should pop, not dominate
-
-### Banned Color Patterns
-
-| Pattern | Why Banned |
-|---------|------------|
-| Pure `#000000` or `#FFFFFF` | Harsh, unrefined |
-| Blue as primary accent | Default, overused |
-| Neon pink + cyan together | Cyberpunk cliché |
-| Gradient backgrounds everywhere | AI-generated aesthetic |
-| Gray text on colored backgrounds | Use same-hue tints instead |
 
 ---
 
@@ -257,31 +223,13 @@ Match gray temperature to your palette's dominant hue.
 | Dropdowns | md/lg |
 | Modals | lg/xl |
 
-**Two-part shadows:** Large soft blur + small dark contact shadow.
-
----
-
-## UI Elements (Required in All Proposals)
-
-| Category | Required Variants |
-|----------|-------------------|
-| **Buttons** | Primary, secondary, ghost, destructive + disabled states |
-| **Inputs** | Text, select, checkbox, radio, toggle + focus/error states |
-| **Cards** | Match your C-code + hover state |
-| **Alerts** | Success, error, warning, info |
-| **Modals** | Header, body, actions + overlay |
-| **Loading** | Spinner or skeleton |
-| **Empty States** | Icon + message + action |
-
-Plus any app-specific elements from captured UI. Use realistic labels.
-
 ---
 
 ## Anti-AI Checklist
 
-Avoid these AI-generated patterns:
+Avoid these patterns that mark AI-generated design:
 
-| AI Pattern | Elite Alternative |
+| AI Pattern | Better Alternative |
 |------------|-------------------|
 | Gradient backgrounds everywhere | Flat colors, strategic gradients |
 | Same border-radius on everything | Varied radii by element size |
@@ -307,4 +255,3 @@ Avoid these AI-generated patterns:
 **Key techniques:**
 - Emphasize by de-emphasizing competitors
 - Labels are a last resort — data speaks for itself
-- Style actions by hierarchy, not meaning — "Delete" isn't automatically red

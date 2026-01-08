@@ -1,0 +1,137 @@
+<!--
+MAKEOVER_METADATA
+theme: {name}
+dna: {H#-L#-G#-D#-C#-N# or FREEFORM}
+styling_system: vanilla
+pages: {page1}, {page2}, ...
+wild_mode: {true/false}
+palette: {palette name}
+references: {ref1}, {ref2}
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{Theme Name} - Makeover Proposal</title>
+  <style>/* Your styles */</style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 1: THEME HEADER (REQUIRED)
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="theme-header">
+    <h1>{Theme Name}</h1>
+    <p class="tagline">{One-line concept}</p>
+    <p class="dna">DNA: {code} or Structure: {mutation description}</p>
+    <p class="references">Inspired by: {2-3 specific references}</p>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 2: COLOR PALETTE (REQUIRED)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="color-palette">
+    <h2>Color Palette: {Evocative Name}</h2>
+    <p class="color-story">{One sentence explaining mood and origin}</p>
+    <div class="swatches">
+      <!-- 5-7 swatches with your chosen HSL values -->
+      <div class="swatch" style="background: {your-hsl}">
+        <span>{Role}</span>
+        <code>{your-hsl}</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 3: APP CONTENT (REQUIRED)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="app-content">
+    <h2>App Preview</h2>
+    <!--
+      Your themed redesign of the captured app pages goes here.
+      Use REAL content from tmp/makeover/capture/*.snapshot files.
+    -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 4: UI ELEMENTS (REQUIRED)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="ui-elements">
+    <h2>UI Elements</h2>
+
+    <h3>Buttons</h3>
+    <div class="button-group">
+      <button class="btn-primary">Primary</button>
+      <button class="btn-secondary">Secondary</button>
+      <button class="btn-ghost">Ghost</button>
+      <button class="btn-destructive">Destructive</button>
+      <button class="btn-primary" disabled>Disabled</button>
+    </div>
+
+    <h3>Inputs</h3>
+    <div class="input-group">
+      <input type="text" placeholder="Text input">
+      <input type="text" placeholder="Focus state" class="focus">
+      <input type="text" placeholder="Error state" class="error">
+      <select><option>Select option</option></select>
+      <label><input type="checkbox"> Checkbox</label>
+      <label><input type="radio" name="r"> Radio</label>
+      <label class="toggle"><input type="checkbox"><span></span> Toggle</label>
+    </div>
+
+    <h3>Cards</h3>
+    <div class="card-group">
+      <div class="card">
+        <img src="..." alt="...">
+        <h4>Card Title</h4>
+        <p>Card description</p>
+      </div>
+    </div>
+
+    <h3>Alerts</h3>
+    <div class="alert-group">
+      <div class="alert alert-success">Success message</div>
+      <div class="alert alert-error">Error message</div>
+      <div class="alert alert-warning">Warning message</div>
+      <div class="alert alert-info">Info message</div>
+    </div>
+
+    <h3>Modal</h3>
+    <div class="modal-demo">
+      <div class="modal-overlay"></div>
+      <div class="modal">
+        <div class="modal-header">Modal Title</div>
+        <div class="modal-body">Modal content goes here.</div>
+        <div class="modal-actions">
+          <button class="btn-secondary">Cancel</button>
+          <button class="btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <h3>Loading</h3>
+    <div class="loading-group">
+      <div class="spinner"></div>
+    </div>
+
+    <h3>Empty State</h3>
+    <div class="empty-state">
+      <p>No items found</p>
+      <button class="btn-primary">Add Item</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 5: MOTION SHOWCASE (REQUIRED if N3+ or has animations)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="motion-showcase">
+    <h2>Motion & Interactions</h2>
+    <p>Hover, click, and interact with elements below to see animations.</p>
+    <!--
+      Demo your hover effects, transitions, scroll animations here.
+    -->
+  </section>
+
+</body>
+</html>

@@ -1,10 +1,77 @@
 # Wild Mode Proposal Guide
 
-Read captured content from **tmp/makeover/capture/**. DNA is optional — use `DNA: FREEFORM`.
+---
+
+## STEP 1: Invoke Frontend-Design Plugin
+
+Call the frontend-design plugin first for baseline design guidance.
 
 ---
 
-## OUTPUT FORMAT
+## Structural Mutations (Choose One Primary)
+
+| Type | What Changes |
+|------|--------------|
+| **Page** | Collapse all into one scroll, fragment into scattered artifacts, dissolve boundaries |
+| **Navigation** | Nav becomes content, discovery-based, abolished entirely, environmental |
+| **Hierarchy** | Invert (metadata becomes hero), flatten, dynamic on interaction |
+| **Interaction** | Passive (time-based), friction (earn access), ambient (responds to presence) |
+
+---
+
+## Visual Techniques (Supplement Structure)
+
+- Rotation 5-15 degrees, overlap, broken grid
+- Asymmetric splits, scale extremes
+- Mixed fonts, vertical text
+- Color clash, texture overload
+
+---
+
+## Craft Basics
+
+- Use HSL for all colors
+- Avoid AI patterns: gradient backgrounds everywhere, same border-radius on everything, shadow on every element
+
+---
+
+## Banned
+
+**Concepts:** Conspiracy board, evidence locker, fortune teller, arcade cabinet, specimen display, escape room, detective case files
+
+**Visuals:** Neon pink + cyan together, Matrix green rain, horizontal CRT scanlines
+
+---
+
+## STEP 2: Read Required Files
+
+Read these files in order:
+1. `tmp/makeover/capture/manifest.json` - pages, styling system
+2. `tmp/makeover/capture/*.snapshot` - actual content for each page
+3. `tmp/makeover/constraints.json` - your assigned structural mutation
+
+---
+
+## STEP 3: Verification Gate
+
+**STOP. Output these statements before generating any HTML.**
+
+```
+VERIFICATION:
+- Pages from manifest: [list them]
+- Content I will use: [2-3 specific items per page from snapshots]
+- My structural mutation: [page/navigation/hierarchy/interaction]
+- Mutation description: [one sentence explaining how structure changes]
+- Decoration test: Could this be a normal theme with different colors? [must be NO]
+- References (2-3 specific): [list them]
+- Palette name: [evocative name]
+```
+
+**If "decoration test" is YES, you need a more radical structural mutation.**
+
+---
+
+## STEP 4: Generate HTML
 
 **Read TEMPLATE.md for the exact HTML structure.** Your proposal MUST have all 5 sections:
 
@@ -16,61 +83,4 @@ Read captured content from **tmp/makeover/capture/**. DNA is optional — use `D
 
 **Missing any section = invalid proposal.**
 
-**Before generating:** Invoke the frontend-design plugin.
-
----
-
-## Wild Mode Checklist
-
-### Structural (What Makes It Wild)
-- [ ] At least ONE structural mutation (page, navigation, hierarchy, or interaction)
-- [ ] NOT the same page structure as original
-- [ ] NOT the same navigation model
-- [ ] Passes decoration test: couldn't be a normal theme with different colors
-
-### Content
-- [ ] All captured content present (restructured is fine)
-- [ ] 2-3 specific references cited
-- [ ] NOT: conspiracy board, evidence locker, fortune teller, arcade cabinet, specimen, escape room
-
-### Showcase Sections
-- [ ] Section 1: Theme Header with name, concept, mutation, references
-- [ ] Section 2: Color Palette with 5-7 HSL swatches and story
-- [ ] Section 3: App Content with real data from capture
-- [ ] Section 4: UI Elements — standard + app-specific from capture
-- [ ] Section 5: Motion Showcase demonstrating interactions
-
-**App-specific elements:** Check capture files for elements unique to this app. If unsure, use `AskUserQuestion` before generating.
-
----
-
-## Structural Mutations (Choose One)
-
-| Type | Examples |
-|------|----------|
-| **Page** | Collapse all into one scroll, fragment into scattered artifacts, dissolve into spatial layout |
-| **Navigation** | Nav becomes content, discovery-based, abolished entirely, environmental |
-| **Hierarchy** | Invert (metadata becomes hero), flatten, make dynamic on interaction |
-| **Interaction** | Passive (time-based), friction (earn access), ambient (responds to presence) |
-
----
-
-## Visual Techniques (Supplement Structure)
-
-- Rotation 5-15°, overlap, broken grid, asymmetric splits
-- Scale extremes, color clash, texture overload
-- Mixed fonts, ransom note, vertical text
-
----
-
-## Banned
-
-**Concepts:** Conspiracy board, evidence locker, fortune teller, arcade cabinet, specimen display, escape room
-
-**Visuals:** Neon pink+cyan, Matrix green, horizontal CRT scanlines
-
----
-
-## The Wild Standard
-
-Could someone implement this as a normal theme? → Must be **NO**
+Output: `tmp/makeover/themes/{name}.html`
