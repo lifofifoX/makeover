@@ -45,8 +45,7 @@ Wild mode exists to produce designs that **question the fundamental assumptions 
 - [ ] **Color palette** with evocative name, 5-7 colors, color story
 - [ ] **2-3 specific references cited**
 - [ ] **All captured content shown** (can be restructured)
-- [ ] **UI Elements section** — buttons, inputs, alerts, modals, loading/empty states
-- [ ] **Styling system respected** in output format
+- [ ] **UI Elements section** — buttons, inputs, cards, alerts, modals, loading, empty states, plus app-specific
 
 ### Craft Elements (Still Apply)
 - [ ] **Typography correctness** — curly quotes (" "), proper dashes (– —)
@@ -310,6 +309,12 @@ Intentionally mismatched:
 
 ---
 
+## UI Elements
+
+Include a UI Elements section: buttons, form inputs, cards, alerts, modals, loading states, empty states — plus any app-specific elements derived from the captured UI.
+
+---
+
 ## Agent Prompt Template
 
 ```
@@ -354,7 +359,7 @@ File: tmp/makeover/themes/{name}.html
 1. Theme header (name, structure/DNA, references)
 2. Color palette with swatches and story
 3. Restructured app content (NOT same page structure)
-4. **UI Elements showcase** — buttons (primary, secondary, destructive), form inputs, cards, alerts (success, error, warning, info), modals, loading states, empty states, and any app-specific components
+4. UI Elements (see section above)
 5. Motion/interaction showcase
 
 ## Content Rules

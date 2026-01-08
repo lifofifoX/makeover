@@ -11,8 +11,7 @@
 - [ ] **Color palette** with evocative name, 5-7 colors (no pure #000/#FFF), color story
 - [ ] **2-3 specific references cited** — not categories, specific items
 - [ ] **All captured pages shown** with REAL content
-- [ ] **UI Elements section** — buttons, inputs, alerts, modals, loading/empty states
-- [ ] **Styling system respected** — output matches detected system
+- [ ] **UI Elements section** — buttons, inputs, cards, alerts, modals, loading, empty states, plus app-specific
 
 ### Elite Craft Verification
 - [ ] **Spacing from scale only** — 4/8/12/16/24/32/48/64px
@@ -383,6 +382,26 @@ Every theme declares: `H#-L#-G#-D#-C#-N#`
 
 ---
 
+## UI Elements
+
+Every proposal must include a UI Elements section.
+
+| Category | Variants |
+|----------|----------|
+| **Buttons** | Primary, secondary, ghost, destructive; show disabled state |
+| **Form Inputs** | Text, select, checkbox, radio, toggle; show focus + error states |
+| **Cards** | Match the C-code; show hover state if interactive |
+| **Alerts** | Success, error, warning, info |
+| **Modals** | Header, body, actions; show overlay |
+| **Loading** | Spinner or skeleton |
+| **Empty States** | Icon/illustration + message + action |
+
+Also include app-specific elements derived from the captured UI: badges, tags, avatars, tables, progress indicators, pagination, tabs — whatever the app uses.
+
+Use realistic labels from the app — not "Button" or "Click me".
+
+---
+
 ## UX Archetypes
 
 | Archetype | DNA Example | Key Features |
@@ -463,7 +482,7 @@ File: tmp/makeover/themes/{name}.html
 1. Theme header (name, DNA, references)
 2. Color palette with swatches and story
 3. Each captured page with REAL content
-4. **UI Elements showcase** — buttons (primary, secondary, destructive), form inputs, cards, alerts (success, error, warning, info), modals, loading states, empty states, and any app-specific components
+4. UI Elements (see section above)
 5. Motion showcase (if N3+)
 
 ## Content Rules (CRITICAL)
