@@ -1,119 +1,307 @@
-# Capture Workflow
+# Capture & Orchestration Workflow
 
-Playwright-based app discovery and content capture. **Orchestrator reads this, not proposal agents.**
+Playwright-based app discovery, content capture, and proposal orchestration. **Orchestrator reads this, not proposal agents.**
 
 ---
 
-## Step 1: Get App URL
+## Phase 1: Reference Research (Optional)
+
+### When User Provides URLs
+
+```
+User: "I want something like stripe.com and linear.app"
+```
+
+1. Navigate to each URL with Playwright
+2. Take snapshots
+3. Extract patterns:
+
+| Element | Extract |
+|---------|---------|
+| Colors | Dominant hues, accent colors (sample from hero, buttons, text) |
+| Typography | Font families, weights, sizes (inspect headings + body) |
+| Spacing | Section padding, component gaps (estimate px values) |
+| Layout | Grid structure, header type, card patterns |
+| Motion | Hover effects, scroll behavior (estimate N-level) |
+
+4. Write to `tmp/makeover/references/`:
+
+```
+tmp/makeover/references/
+├── stripe.com/
+│   ├── snapshot.html
+│   └── analysis.json
+├── linear.app/
+│   └── ...
+└── summary.json
+```
+
+**summary.json format:**
+```json
+{
+  "sources": ["stripe.com", "linear.app"],
+  "extracted": {
+    "colors": ["#635BFF", "#0A2540", "#F6F9FC"],
+    "typography": {
+      "headlines": "sans-serif 600-700",
+      "body": "sans-serif 400"
+    },
+    "spacing": "generous (32-48px sections)",
+    "motion_level": "N2-N3"
+  },
+  "cached_at": "2024-01-15T10:30:00Z"
+}
+```
+
+### When User Provides Keywords
+
+Map to canonical examples, then browse:
+
+| Keyword | Browse |
+|---------|--------|
+| minimal, clean | stripe.com, linear.app |
+| editorial | nytimes.com, medium.com |
+| luxury | aesop.com, apple.com |
+| dashboard | vercel.com/dashboard, linear.app |
+| brutalist | cargo.site, hfrcc.com |
+
+### When User Provides Images
+
+Use Read tool to analyze reference images:
+
+| Element | Look For |
+|---------|----------|
+| Colors | Dominant hue, accents, contrast, saturation |
+| Typography | Serif/sans/display, weight, case, spacing |
+| Layout | Centered/asymmetric, grid/organic, dense/spacious |
+| Texture | Grain/smooth, matte/glossy, layered/flat |
+| Mood | Era, emotion, energy level |
+
+### When NOT to Browse
+
+- Do NOT screenshot generated proposal HTML files
+- Do NOT browse without user request or reference URLs
+- Skip if references cached <24h ago
+
+---
+
+## Phase 2: App Discovery & Capture
+
+### Step 1: Get App URL
 
 ```
 "Where is your app running?"
 Default: http://localhost:3000
 ```
 
-## Step 2: Browse and Discover Pages
+### Step 2: Discover Pages
 
-Navigate to the app URL. Explore by:
-- Clicking navigation links
-- Checking common routes (/dashboard, /settings, /profile, /[id])
-- Looking at the DOM for route information
+Navigate and explore:
+- Click navigation links
+- Check common routes: /, /dashboard, /settings, /profile, /[id]
+- Look at DOM for route information
 
-For each distinct page:
-- Take a snapshot (accessibility tree)
-- Note the URL/route
-- Note the page purpose
+For each distinct page, note:
+- URL/route
+- Page purpose
+- Key content elements
 
-## Step 3: Ask User Which Pages
+### Step 3: Capture to Files
 
-Use AskUserQuestion to confirm:
+Create capture directory:
+```
+tmp/makeover/capture/
+├── manifest.json
+├── home.snapshot
+├── dashboard.snapshot
+├── settings.snapshot
+└── images.json
+```
+
+**manifest.json:**
+```json
+{
+  "app_url": "http://localhost:3000",
+  "captured_at": "2024-01-15T10:30:00Z",
+  "styling_system": "Tailwind",
+  "pages": [
+    { "slug": "home", "url": "/", "purpose": "Landing page" },
+    { "slug": "dashboard", "url": "/dashboard", "purpose": "Main dashboard" },
+    { "slug": "settings", "url": "/settings", "purpose": "User settings" }
+  ]
+}
+```
+
+**{page}.snapshot** (one per page):
+- Accessibility tree snapshot from Playwright
+- Includes: headings, buttons, forms, images, text content
+- Actual content, not structure description
+
+**images.json:**
+```json
+{
+  "images": [
+    { "src": "http://localhost:3000/logo.png", "alt": "Company logo", "page": "home" },
+    { "src": "http://localhost:3000/hero.jpg", "alt": "Hero image", "page": "home" }
+  ]
+}
+```
+
+### Step 4: Detect Styling System
+
+Quick detection from DOM/files:
+
+| System | Detection |
+|--------|-----------|
+| Tailwind | Classes like `bg-blue-500`, `px-4`, `flex` |
+| CSS Modules | Classes like `styles_button__abc123` |
+| Styled-components | `sc-` prefixed classes |
+| Vanilla CSS | Standard class names, inline styles |
+
+Record in manifest.json.
+
+### Step 5: Confirm Pages with User
 
 ```
 "I found these pages in your app:
 - / (Home/Landing)
 - /dashboard (Main dashboard)
 - /settings (User settings)
-- /profile/[id] (User profiles)
 
 Which pages should appear in the theme proposals?"
+
+Options: [All of these (Recommended)] [Select specific pages]
 ```
 
-Options: Let user select multiple, or suggest "All of these (Recommended)"
-
-## Step 4: Capture DOM Structure
-
-For each selected page, extract:
-- **Actual content** — real text, headings, labels
-- **Real images** — actual image URLs from the page
-- **Component structure** — buttons, cards, forms, modals
-- **Current classes** — detect Tailwind, CSS modules, etc.
-
-Store this as context for proposal agents.
-
-## Step 5: Detect Styling System
-
-Quick detection from DOM/files:
-- Tailwind: class names like `bg-blue-500`, `px-4`
-- CSS Modules: class names like `styles_button__abc123`
-- Styled-components: `sc-` prefixed classes
-- Vanilla CSS: standard class names, inline styles
-
-Note the system for proposal metadata.
+Update manifest.json with `"included": true/false` per page.
 
 ---
 
-## Visual Research (Optional)
+## Phase 3: Variance Planning
 
-### Browsing Reference Sites
+Before spawning agents, pre-compute constraints to ensure diverse proposals.
 
-When user mentions inspiration sources, use Playwright to visit them:
+### Normal Mode Variance
 
+Ensure ≥3 DNA position differences between proposals:
+
+```json
+{
+  "proposals": [
+    {
+      "name": "theme-a",
+      "mode": "normal",
+      "constraints": {
+        "H": [4, 5, 8],
+        "L": [1, 2, 3],
+        "colorTemp": "warm",
+        "motion_range": "N1-N3"
+      }
+    },
+    {
+      "name": "theme-b",
+      "mode": "normal",
+      "constraints": {
+        "H": [1, 2, 11],
+        "L": [5, 6, 7],
+        "colorTemp": "cool",
+        "motion_range": "N4-N6"
+      }
+    }
+  ]
+}
 ```
-"I want something like stripe.com and linear.app"
-→ Navigate to stripe.com, take snapshots
-→ Navigate to linear.app, take snapshots
-→ Analyze: typography, spacing, color, layout patterns, motion
+
+### Wild Mode Variance
+
+Assign different structural mutations:
+
+```json
+{
+  "name": "wild-a",
+  "mode": "wild",
+  "constraints": {
+    "structural_mutation": "page_collapse",
+    "nav_mutation": "abolished"
+  }
+},
+{
+  "name": "wild-b",
+  "mode": "wild",
+  "constraints": {
+    "structural_mutation": "page_fragment",
+    "nav_mutation": "as_content"
+  }
+}
 ```
 
-**When to browse:**
-- User mentions specific sites ("like Notion", "Vercel vibes")
-- User provides URLs
-- Vague inspiration ("minimal SaaS") — find canonical examples
+### Constraint Distribution Rules
 
-**When NOT to browse:**
-- Do NOT screenshot generated proposal HTML files
-- Do NOT browse unless user explicitly asks or provides reference URLs
+| Axis | Rule |
+|------|------|
+| Header (H) | No duplicates across normal proposals |
+| Layout (L) | No duplicates across normal proposals |
+| Color Temperature | At least 2 different (warm/cool/neutral) |
+| Motion | Spread across N1-3, N4-6, N7-9 |
+| Structural (wild) | Each uses different primary mutation |
 
-### Analyzing Image References
-
-When user provides reference images, use Read tool to analyze:
-
-| Element | What to Look For |
-|---------|------------------|
-| Colors | Dominant hue, accents, contrast, saturation, temperature |
-| Typography | Serif/sans/display, weight, case, spacing, era |
-| Layout | Centered/asymmetric, grid/organic, dense/spacious |
-| Texture | Grain/smooth, matte/glossy, layered/flat |
-| Mood | Era, emotion, energy level, cultural context |
+Write constraints to: `tmp/makeover/constraints.json`
 
 ---
 
-## Spawning Proposal Agents
+## Phase 4: Spawn Proposal Agents
 
-After capture, spawn agents in parallel:
+### Agent Prompt Construction
+
+For each proposal:
 
 ```
-Task(subagent_type="general-purpose", description="Propose {name} theme", prompt="...")
+Task(
+  subagent_type="general-purpose",
+  description="Propose {name} theme",
+  prompt="""
+Read PROPOSE_{mode}.md for complete guidance.
+
+Your assignment:
+- Theme name: {name}
+- Mode: {normal|wild}
+- Read captures from: tmp/makeover/capture/
+- Read your constraints from: tmp/makeover/constraints.json
+
+Output: tmp/makeover/themes/{name}.html
+
+Invoke frontend-design plugin before generating HTML.
+"""
+)
 ```
 
-Pass to each agent:
-1. Captured page content (DOM, text, images)
-2. Detected styling system
-3. Which file to read (PROPOSE_NORMAL.md or PROPOSE_WILD.md)
-4. Theme assignment (name, references, palette direction)
+### Spawn in Parallel
+
+Launch all proposal agents simultaneously:
+
+```python
+# Conceptual - spawn all at once
+agents = [
+  Task("Propose elegant-mono theme", normal_prompt),
+  Task("Propose warm-editorial theme", normal_prompt),
+  Task("Propose collapsed-stream wild theme", wild_prompt),
+]
+```
+
+### What Agents Read
+
+| File | Purpose |
+|------|---------|
+| PROPOSE_NORMAL.md or PROPOSE_WILD.md | Mode-specific guidance |
+| tmp/makeover/capture/manifest.json | Pages, styling system |
+| tmp/makeover/capture/{page}.snapshot | DOM content |
+| tmp/makeover/constraints.json | Assigned variance constraints |
+| DESIGN_SYSTEM.md | Optional: detailed scales |
+| MOTION.md | If N3+ motion level |
 
 ---
 
-## Preview Index Generation
+## Phase 5: Generate Preview Index
 
 After all proposals complete, generate `tmp/makeover/themes/index.html`:
 
@@ -169,8 +357,20 @@ After all proposals complete, generate `tmp/makeover/themes/index.html`:
     }
     .card-body { padding: 1.25rem; }
     .card-title { font-size: 1.125rem; font-weight: 600; margin: 0 0 0.5rem; }
-    .card-dna { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin: 0 0 0.75rem; }
+    .card-meta { font-family: ui-monospace, monospace; font-size: 0.75rem; color: #888; margin: 0 0 0.75rem; }
     .card-desc { font-size: 0.875rem; color: #555; margin: 0; line-height: 1.5; }
+    .badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.5rem;
+    }
+    .badge-normal { background: #e8e8e8; color: #666; }
+    .badge-wild { background: #ff6b6b; color: white; }
   </style>
 </head>
 <body>
@@ -183,8 +383,11 @@ After all proposals complete, generate `tmp/makeover/themes/index.html`:
         <iframe src="[name].html" title="[Theme Name] preview" loading="lazy"></iframe>
       </div>
       <div class="card-body">
-        <h2 class="card-title">[Theme Name]</h2>
-        <p class="card-dna">DNA: [code]</p>
+        <h2 class="card-title">
+          [Theme Name]
+          <span class="badge badge-[mode]">[mode]</span>
+        </h2>
+        <p class="card-meta">DNA: [code] · Refs: [references]</p>
         <p class="card-desc">[Brief description]</p>
       </div>
     </a>
@@ -192,3 +395,24 @@ After all proposals complete, generate `tmp/makeover/themes/index.html`:
 </body>
 </html>
 ```
+
+---
+
+## Final Output
+
+```
+tmp/makeover/
+├── capture/
+│   ├── manifest.json
+│   ├── {page}.snapshot (per page)
+│   └── images.json
+├── references/ (if browsed)
+│   ├── {domain}/
+│   └── summary.json
+├── constraints.json
+└── themes/
+    ├── index.html
+    └── {name}.html (per proposal)
+```
+
+Report to user: **"Open tmp/makeover/themes/index.html to compare proposals"**

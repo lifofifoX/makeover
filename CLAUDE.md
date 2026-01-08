@@ -1,92 +1,62 @@
 # CLAUDE.md
 
-Project guidance for Claude Code.
-
-## Overview
-
-Makeover redesigns applications with distinctive, production-grade visual themes. It browses your running app, captures real UI, and generates theme proposals showing exactly how themes look on your actual content.
+Routing guide for makeover skill. **Do not duplicate content from other files here.**
 
 ## Dependencies
 
 1. **frontend-design plugin**: `/plugins add claude-plugins-official/frontend-design`
 2. **Playwright MCP**: `claude mcp add playwright npx @playwright/mcp@latest`
 
-## Commands
-
-```
-/makeover propose [count] [hints...]   # Browse app, generate proposals
-/makeover propose [count] --wild       # Experimental themes (structural transformation)
-/makeover implement [names]            # Implement approved theme
-```
-
-## File Structure
-
-```
-CLAUDE.md              # This file — routing and overview
-SKILL.md               # User-facing skill definition
-CAPTURE.md             # Playwright workflow (orchestrator only)
-PROPOSE_NORMAL.md      # Complete normal mode guide (agents read this)
-PROPOSE_WILD.md        # Complete wild mode guide (agents read this)
-IMPLEMENT.md           # Implementation workflow
-MOTION.md              # Motion catalog (if N3+ motion)
-```
-
-## Reading Order
+## File Routing
 
 | Role | Phase | Read |
 |------|-------|------|
-| Orchestrator | Capture | CAPTURE.md |
-| Agent | Normal proposal | PROPOSE_NORMAL.md only |
-| Agent | Wild proposal | PROPOSE_WILD.md only |
-| Agent | If N3+ motion | + MOTION.md |
+| Orchestrator | Capture & Planning | CAPTURE.md |
+| Agent | Normal proposal | PROPOSE_NORMAL.md, captures from tmp/makeover/capture/ |
+| Agent | Wild proposal | PROPOSE_WILD.md, captures from tmp/makeover/capture/ |
+| Agent | Needs DNA/scale details | + DESIGN_SYSTEM.md |
+| Agent | N3+ motion | + MOTION.md |
 | Agent | Implementation | IMPLEMENT.md |
 
-**Key principle:** Each proposal agent reads ONE file that contains everything needed.
+**Principle:** Agents read from files, not inline prompts. Captures and constraints stored in tmp/makeover/.
 
-## Workflow
+## Orchestrator Workflow
 
-### Orchestrator
-1. Read CAPTURE.md
-2. Ask for app URL (default: localhost:3000)
-3. Browse with Playwright, discover pages
-4. Ask user which pages to include (AskUserQuestion)
-5. Capture real DOM/content from each page
-6. Detect styling system
-7. Spawn proposal agents in parallel, passing captured content
+1. Read CAPTURE.md for complete workflow
+2. **Phase 1:** Browse references (if user provides URLs/keywords)
+3. **Phase 2:** Discover and capture app pages to tmp/makeover/capture/
+4. **Phase 3:** Pre-compute variance constraints to tmp/makeover/constraints.json
+5. **Phase 4:** Spawn proposal agents in parallel (pass file paths, not content)
+6. **Phase 5:** Generate index.html linking all proposals
+7. Report: "Open tmp/makeover/themes/index.html to compare"
 
-### Proposal Agents
-1. Read PROPOSE_NORMAL.md OR PROPOSE_WILD.md (one file only)
-2. Read MOTION.md if N3+ motion
-3. Generate proposal HTML with real app content
-4. Save to tmp/makeover/themes/{name}.html
+## File-Based Architecture
 
-### Post-Proposal (Orchestrator)
-1. Generate index.html linking all proposals
-2. Report: "Open tmp/makeover/themes/index.html to compare"
+```
+tmp/makeover/
+├── capture/
+│   ├── manifest.json      # Pages, styling system
+│   ├── {page}.snapshot    # DOM captures per page
+│   └── images.json        # Extracted image URLs
+├── references/            # Optional: browsed reference sites
+│   └── summary.json
+├── constraints.json       # Pre-computed variance constraints
+└── themes/
+    ├── index.html         # Comparison page
+    └── {name}.html        # Individual proposals
+```
 
-## Critical Constraints
+## Mode Summary
 
-### Normal Mode
-- DNA required: `H#-L#-G#-D#-C#-N#`
-- Spacing: only 4/8/12/16/24/32/48/64px
-- No pure #000/#FFF
-- One accent color, ≤10% of surface
-- Pass squint test, removal test, anti-AI check
+| Mode | DNA | Key Constraint |
+|------|-----|----------------|
+| Normal | Required: `H#-L#-G#-D#-C#-N#` | Systematic design, spacing scale, no pure #000/#FFF |
+| Wild | Optional: `DNA: FREEFORM` | **Structural transformation required** — visual wild alone fails |
 
-### Wild Mode
-- **Structural transformation required** — visual wild alone is not enough
-- DNA optional: use `DNA: FREEFORM` or declare custom structure
-- Must transform at least one of: pages, navigation, hierarchy, interaction
-- FORBIDDEN: same page structure with different skin
+## Both Modes
 
-### Both Modes
 - Real app content only (no placeholders)
 - Real images from app (or realistic internet images)
 - Cite 2-3 specific references
 - Embed MAKEOVER_METADATA comment
-
-## Banned Patterns
-
-**Themes (never default to):** Brutalist, Terminal/Hacker, NASA/Mission Control, Zine/Punk, Medical/Clinical, Arcade/Casino
-
-**Elements:** Inter font, blue accents, generic card grids, top-bar + logo left/links right
+- Complete Pre-Submit Verification before writing HTML
