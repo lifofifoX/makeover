@@ -24,9 +24,11 @@ If user prompt is ambiguous or could benefit from clarification, use AskUserQues
 
 ## Variance Planning
 
-Pre-compute constraints to ensure diverse proposals. Write to `tmp/makeover/constraints.json` (or append if file exists).
+Pre-compute constraints to ensure diverse proposals.
 
 ### Normal Mode
+
+**Read `./DNA_CODES.md` for valid code options.**
 
 Ensure ≥3 DNA position differences between proposals:
 
@@ -46,10 +48,9 @@ Assign different structural mutations to each proposal. No two proposals share t
 ## Spawn Proposal Agents
 
 Before launching agents, read and prepare:
-1. `tmp/makeover/constraints.json` - get this agent's assignment
-2. `tmp/makeover/capture/ui-elements.json` - inline in prompt
-3. `tmp/makeover/capture/images.json` - filter to valid URLs only
-4. `tmp/makeover/capture/instructions.md` - technical constraints (if exists)
+1. `tmp/makeover/capture/ui-elements.json` - inline in prompt
+2. `tmp/makeover/capture/images.json` - filter to valid URLs only
+3. `tmp/makeover/capture/instructions.md` - technical constraints (if exists)
 
 Launch all agents in parallel with inlined content:
 
@@ -95,7 +96,6 @@ tmp/makeover/
 │   └── instructions.md (if provided)
 ├── references/ (if browsed)
 │   └── summary.json
-├── constraints.json
 └── themes/
     ├── index.html
     └── {name}.html (per proposal)
