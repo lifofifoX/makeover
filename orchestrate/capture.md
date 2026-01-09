@@ -98,12 +98,14 @@ Update manifest.json with `"included": true/false` per page.
 
 ---
 
-## Step 6: Additional Instructions
+## Step 6: App Quirks
 
 ```
-"Any special instructions for generating proposals?"
+"Are there any technical quirks about your app that proposals should account for?"
 
-Options: [No, continue] [Yes, let me add some]
+Options: [No, continue] [Yes, let me describe them]
 ```
 
-If user provides instructions, write to `tmp/makeover/capture/instructions.md`. These are passed to proposal agents verbatim.
+If user provides quirks, write to `tmp/makeover/capture/instructions.md`.
+
+**Technical constraints only** - NOT design direction (that comes from the propose prompt).
