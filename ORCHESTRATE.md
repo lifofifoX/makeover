@@ -45,7 +45,13 @@ Assign different structural mutations to each proposal. No two proposals share t
 
 ## Spawn Proposal Agents
 
-Launch all agents in parallel:
+Before launching agents, read and prepare:
+1. `tmp/makeover/constraints.json` - get this agent's assignment
+2. `tmp/makeover/capture/ui-elements.json` - inline in prompt
+3. `tmp/makeover/capture/images.json` - filter to valid URLs only
+4. `tmp/makeover/capture/instructions.md` - technical constraints (if exists)
+
+Launch all agents in parallel with inlined content:
 
 ```
 Task(
@@ -59,7 +65,16 @@ Read and follow PROPOSE_{mode}.md exactly.
 Assignment:
 - Theme name: {name}
 - Mode: {mode}
-- Constraints: tmp/makeover/constraints.json
+- Constraints: {inlined constraints for this agent}
+
+App-specific UI elements:
+{inlined ui-elements.json content}
+
+Technical constraints:
+{inlined instructions.md content, or "None" if file doesn't exist}
+
+Images — NO PLACEHOLDERS, use only these URLs:
+{inlined valid image URLs from images.json}
 """
 )
 ```

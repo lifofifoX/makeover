@@ -66,6 +66,12 @@ tmp/makeover/capture/
 }
 ```
 
+Rules:
+- Extract `src` directly from DOM (`document.querySelectorAll('img')`) — not from accessibility tree
+- Full URLs only — never truncate
+- Only `<img>` elements — skip iframes, embedded content, data URIs
+- Skip decorative/icon images (small UI elements)
+
 ---
 
 ## Step 4: Detect Styling System

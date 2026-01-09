@@ -31,8 +31,7 @@ Call the frontend-design plugin first for baseline design guidance.
 Read these files in order:
 1. `tmp/makeover/capture/manifest.json` - pages, styling system
 2. `tmp/makeover/capture/*.snapshot` - actual content for each page
-3. `tmp/makeover/constraints.json` - your assigned DNA constraints
-4. `./DESIGN_SYSTEM.md` - DNA code definitions, spacing scale, color system
+3. `./DESIGN_SYSTEM.md` - DNA code definitions, spacing scale, color system
 
 ---
 
@@ -55,7 +54,6 @@ VERIFICATION:
 
 ## STEP 4: Generate HTML
 
-**Read `tmp/makeover/capture/instructions.md` for technical constraints (if exists).**
 **Read TEMPLATE.md for section requirements and HTML structure.**
 
 Output: `tmp/makeover/themes/{name}.html`
