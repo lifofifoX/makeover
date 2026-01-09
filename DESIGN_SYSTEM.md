@@ -6,7 +6,24 @@ DNA codes, spacing, typography, and color system for normal mode proposals.
 
 ## DNA System
 
-Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
+Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#-T#-S#-O#`
+
+### Responsive Transforms
+
+DNA codes implicitly adapt on mobile. Proposals declare desktop DNA only.
+
+| Desktop | Mobile Transform |
+|---------|------------------|
+| H2 Left Sidebar | → H8 Hamburger |
+| H3 Right Sidebar | → H8 Hamburger |
+| H5 Split | → H1 Top Bar |
+| L3 Sidebar + Content | → L7 Vertical Scroll |
+| L5 Magazine | → L2 Hero + List |
+| L10 Split Screen | → L3 Stacked |
+| G3 4+ Column | → G2 2 Column |
+| G7 Horizontal Scroll | → G4 Single Column |
+| D1 50/50 Horizontal | → D3 Stacked |
+| D4 Media Dominant | → D3 Stacked |
 
 ### Header (H1-H12)
 
@@ -103,6 +120,55 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 | N3-N4 | Responsive (scroll-triggered, parallax) |
 | N5-N6 | Kinetic/interactive (floating, magnetic, tilt) |
 | N7-N9 | Cinematic to chaotic (morphs, glitch, particles) |
+
+### Transition (T1-T12)
+
+View-to-view transitions when navigating between DNA-defined layouts.
+
+| Code | Style | Use When |
+|------|-------|----------|
+| T1 | Instant Cut | Fast, utilitarian apps |
+| T2 | Crossfade | Subtle, professional |
+| T3 | Slide Horizontal | Linear navigation, wizards |
+| T4 | Slide Vertical | Drill-down, mobile patterns |
+| T5 | Shared Element | Card→detail, visual continuity |
+| T6 | Scale/Zoom | Focus transitions, gallery |
+| T7 | Morph | Fluid, playful apps |
+| T8 | Flip/Rotate | Skeuomorphic, card-based |
+| T9 | Parallax Layers | Depth, immersive |
+| T10 | Reveal/Uncover | Dramatic, editorial |
+| T11 | Stagger Elements | Complex layouts, dashboards |
+| T12 | Cinematic Sequence | Storytelling, high-end |
+
+### State (S1-S6)
+
+How the design handles non-ideal states. Critical for avoiding generic AI output.
+
+| Code | Style | Use When |
+|------|-------|----------|
+| S1 | Minimal Skeleton | Fast-loading, clean apps |
+| S2 | Branded Loading | Identity-heavy, premium |
+| S3 | Progressive Blur | Image-heavy, galleries |
+| S4 | Content Placeholder | Data apps, dashboards |
+| S5 | Animated Empty | Friendly, consumer apps |
+| S6 | Stark Void | Minimalist, editorial |
+
+**Applies to:** Empty states, loading skeletons, error views, offline states.
+
+### Overlay (O1-O8)
+
+Floating and overlay elements that sit above the core layout.
+
+| Code | Style | Use When |
+|------|-------|----------|
+| O1 | None | Clean, distraction-free |
+| O2 | Floating Action Button | Mobile, primary action heavy |
+| O3 | Sticky Bottom Bar | E-commerce, CTAs |
+| O4 | Announcement Banner | Promos, alerts |
+| O5 | Corner Widget | Chat, help, feedback |
+| O6 | Slide-out Drawer | Complex tools, filters |
+| O7 | Toast Stack | Notifications, confirmations |
+| O8 | Command Palette | Power users, keyboard-first |
 
 ---
 
@@ -222,6 +288,18 @@ Match gray temperature to your palette's dominant hue.
 | Cards | sm/md |
 | Dropdowns | md/lg |
 | Modals | lg/xl |
+
+### Theme-Dependent Shadows
+
+Shadows behave differently in dark mode:
+
+| Light Theme | Dark Theme Alternative |
+|-------------|----------------------|
+| Drop shadows | Reduced opacity or glow effects |
+| Black rgba shadows | Darker surface + subtle light edge |
+| High contrast shadows | Softer, ambient occlusion style |
+
+**Dark mode strategy:** Instead of shadows, use layered surfaces with progressively lighter backgrounds. Each elevation step increases lightness slightly while maintaining the same hue and saturation.
 
 ---
 
