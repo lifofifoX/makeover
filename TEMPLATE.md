@@ -1,8 +1,8 @@
 # Proposal HTML Template
 
-**Every proposal MUST follow the structure in `templates/proposal.html` with all 5 sections.**
+**Every proposal MUST follow the structure in `./templates/proposal.html` with all 5 sections.**
 
-Read `templates/proposal.html` for the exact HTML structure to use.
+Read `./templates/proposal.html` for the exact HTML structure to use.
 
 ## Section Requirements
 

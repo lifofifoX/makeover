@@ -58,7 +58,7 @@ Assignment:
 )
 ```
 
-After all complete, generate `tmp/makeover/themes/index.html` using **templates/index.html** as base.
+After all complete, generate `tmp/makeover/themes/index.html` using **./templates/index.html** as base.
 
 ---
 
