@@ -6,7 +6,26 @@ DNA codes, spacing, typography, and color system for normal mode proposals.
 
 ## DNA System
 
-Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
+Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#-T#-S#-O#`
+
+**Density modifiers:** Append `-sparse` or `-dense` to grid codes when content volume is extreme (e.g., `G6-sparse` for 3 items, `G3-dense` for 300+).
+
+### Responsive Transforms
+
+DNA codes implicitly adapt on mobile. Proposals declare desktop DNA only.
+
+| Desktop | Mobile Transform |
+|---------|------------------|
+| H2 Left Sidebar | → H8 Hamburger |
+| H3 Right Sidebar | → H8 Hamburger |
+| H5 Split | → H1 Top Bar |
+| L3 Sidebar + Content | → L7 Vertical Scroll |
+| L5 Magazine | → L2 Hero + List |
+| L10 Split Screen | → L3 Stacked |
+| G3 4+ Column | → G2 2 Column |
+| G7 Horizontal Scroll | → G4 Single Column |
+| D1 50/50 Horizontal | → D3 Stacked |
+| D4 Media Dominant | → D3 Stacked |
 
 ### Header (H1-H12)
 
@@ -104,6 +123,55 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 | N5-N6 | Kinetic/interactive (floating, magnetic, tilt) |
 | N7-N9 | Cinematic to chaotic (morphs, glitch, particles) |
 
+### Transition (T1-T12)
+
+View-to-view transitions when navigating between DNA-defined layouts.
+
+| Code | Style | Use When |
+|------|-------|----------|
+| T1 | Instant Cut | Fast, utilitarian apps |
+| T2 | Crossfade | Subtle, professional |
+| T3 | Slide Horizontal | Linear navigation, wizards |
+| T4 | Slide Vertical | Drill-down, mobile patterns |
+| T5 | Shared Element | Card→detail, visual continuity |
+| T6 | Scale/Zoom | Focus transitions, gallery |
+| T7 | Morph | Fluid, playful apps |
+| T8 | Flip/Rotate | Skeuomorphic, card-based |
+| T9 | Parallax Layers | Depth, immersive |
+| T10 | Reveal/Uncover | Dramatic, editorial |
+| T11 | Stagger Elements | Complex layouts, dashboards |
+| T12 | Cinematic Sequence | Storytelling, high-end |
+
+### State (S1-S6)
+
+How the design handles non-ideal states. Critical for avoiding generic AI output.
+
+| Code | Style | Use When |
+|------|-------|----------|
+| S1 | Minimal Skeleton | Fast-loading, clean apps |
+| S2 | Branded Loading | Identity-heavy, premium |
+| S3 | Progressive Blur | Image-heavy, galleries |
+| S4 | Content Placeholder | Data apps, dashboards |
+| S5 | Animated Empty | Friendly, consumer apps |
+| S6 | Stark Void | Minimalist, editorial |
+
+**Applies to:** Empty states, loading skeletons, error views, offline states.
+
+### Overlay (O1-O8)
+
+Floating and overlay elements that sit above the core layout.
+
+| Code | Style | Use When |
+|------|-------|----------|
+| O1 | None | Clean, distraction-free |
+| O2 | Floating Action Button | Mobile, primary action heavy |
+| O3 | Sticky Bottom Bar | E-commerce, CTAs |
+| O4 | Announcement Banner | Promos, alerts |
+| O5 | Corner Widget | Chat, help, feedback |
+| O6 | Slide-out Drawer | Complex tools, filters |
+| O7 | Toast Stack | Notifications, confirmations |
+| O8 | Command Palette | Power users, keyboard-first |
+
 ---
 
 ## Spacing Scale
@@ -159,13 +227,6 @@ Every normal-mode theme declares: `H#-L#-G#-D#-C#-N#`
 | Headlines (24px+) | Tighten -0.01em |
 | ALL CAPS | Loosen +0.05em to +0.1em |
 
-### Micro-Typography
-
-- Use `" "` not `" "` (curly quotes)
-- Use `–` for ranges, `—` for breaks
-- Use `…` not `...`
-- Line length: 45-75 characters (`max-width: 65ch`)
-
 ---
 
 ## Color System
@@ -209,6 +270,7 @@ Match gray temperature to your palette's dominant hue.
 **Light comes from above.** Define 5 elevation levels:
 
 ```css
+/* Light theme */
 --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
 --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
 --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
@@ -222,6 +284,18 @@ Match gray temperature to your palette's dominant hue.
 | Cards | sm/md |
 | Dropdowns | md/lg |
 | Modals | lg/xl |
+
+### Theme-Dependent Shadows
+
+Shadows behave differently in dark mode:
+
+| Light Theme | Dark Theme Alternative |
+|-------------|----------------------|
+| Drop shadows | Reduced opacity or glow effects |
+| Black rgba shadows | Darker surface + subtle light edge |
+| High contrast shadows | Softer, ambient occlusion style |
+
+**Dark mode strategy:** Instead of shadows, use layered surfaces with progressively lighter backgrounds. Each elevation step increases lightness slightly while maintaining the same hue and saturation.
 
 ---
 
@@ -240,6 +314,8 @@ Avoid these patterns that mark AI-generated design:
 | Inter, Roboto, Open Sans fonts | Distinctive typography choices |
 | Blue as primary accent | Unexpected color choices |
 
+**Exceptions allowed with justification:** These patterns are discouraged, not forbidden. Use them when semantically appropriate (e.g., blue for an ocean brand, Inter for a developer tool matching docs). Document the reasoning.
+
 ---
 
 ## Hierarchy Techniques
@@ -255,3 +331,42 @@ Avoid these patterns that mark AI-generated design:
 **Key techniques:**
 - Emphasize by de-emphasizing competitors
 - Labels are a last resort — data speaks for itself
+
+---
+
+## Core Principles
+
+**These override everything else when in doubt.**
+
+### 1. Favor the Unexpected
+
+When choosing between equally valid options, pick the weirder one. Generic output is the primary failure mode to avoid. Safe is boring.
+
+### 2. Personality Emerges from DNA
+
+Don't let brief keywords constrain code choices upfront. The DNA combination creates the personality. The codes themselves carry inherent character.
+
+### 3. Full Exploration
+
+The DNA combinations exist to be used. Don't cluster around familiar patterns. Match the DNA to the brief, not to what feels safe.
+
+### 4. Context-Dependent Coherence
+
+Some briefs need visual harmony. Others can embrace intentional clash. Let the brief's purpose determine acceptable tension levels.
+
+---
+
+## Coherence Scoring
+
+Every DNA combination should include a coherence analysis.
+
+### Score Categories
+
+| Score | Label | Meaning |
+|-------|-------|---------|
+| 90-100% | Safe | Proven combinations, low risk |
+| 70-89% | Distinctive | Some tension, intentional contrast |
+| 50-69% | Experimental | Significant clash, requires skill |
+| <50% | Chaotic | Multiple competing elements, high risk |
+
+Include brief reasoning when scores are below 70%.
