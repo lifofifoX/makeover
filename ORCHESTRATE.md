@@ -52,8 +52,11 @@ Before launching agents, read and prepare:
 2. `tmp/makeover/capture/images.json` - filter to valid URLs only
 3. `tmp/makeover/capture/instructions.md` - technical constraints (if exists)
 
-Launch all agents in parallel with inlined content:
+**CRITICAL: Use the EXACT prompt template below. Do NOT paraphrase, summarize, or "improve" it.**
 
+Launch all agents in parallel. Copy this template VERBATIM, only substituting the `{placeholder}` values:
+
+<!-- COPY EXACTLY - START -->
 ```
 Task(
   subagent_type="general-purpose",
@@ -66,7 +69,9 @@ Read and follow PROPOSE_{mode}.md exactly.
 Assignment:
 - Theme name: {name}
 - Mode: {mode}
-- Constraints: {inlined constraints for this agent}
+- DNA:
+{DNA_DEFINITIONS}
+- Constraints: {ADDITIONAL_CONSTRAINTS}
 
 App-specific UI elements:
 {inlined ui-elements.json content}
@@ -74,11 +79,12 @@ App-specific UI elements:
 Technical constraints:
 {inlined instructions.md content, or "None" if file doesn't exist}
 
-Images — NO PLACEHOLDERS, use only these URLs:
-{inlined valid image URLs from images.json}
+Images — NO PLACEHOLDERS, use only these:
+{from images.json}
 """
 )
 ```
+<!-- COPY EXACTLY - END -->
 
 After all complete, generate `tmp/makeover/themes/index.html` using **./templates/index.html** as base.
 
