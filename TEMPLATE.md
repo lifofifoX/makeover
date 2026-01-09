@@ -16,6 +16,17 @@ Read `templates/proposal.html` for the exact HTML structure to use.
 
 **Missing any section = invalid proposal.**
 
+---
+
+## Image Usage
+
+Use images from `tmp/makeover/capture/images.json` in your proposals:
+- Include the app's logo if captured
+- Use content images in Section 3 (App Content) to show theme applied to real visuals
+- Reference images via their `src` URLs (the app must be running to view proposals)
+
+---
+
 ## App-Specific UI Elements
 
-Look in the captured snapshots for UI elements unique to this app beyond the standard set. Include these in Section 4 alongside the standard elements.
+Read `tmp/makeover/capture/ui-elements.json` for custom components unique to this app. These MUST appear in Section 4 alongside standard elements.

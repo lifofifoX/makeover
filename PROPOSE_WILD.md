@@ -49,6 +49,8 @@ Read these files in order:
 1. `tmp/makeover/capture/manifest.json` - pages, styling system
 2. `tmp/makeover/capture/*.snapshot` - actual content for each page
 3. `tmp/makeover/constraints.json` - your assigned structural mutation
+4. `tmp/makeover/capture/images.json` - app images to use in proposals
+5. `tmp/makeover/capture/ui-elements.json` - app-specific UI elements to showcase
 
 ---
 
@@ -60,6 +62,8 @@ Read these files in order:
 VERIFICATION:
 - Pages from manifest: [list them]
 - Content I will use: [2-3 specific items per page from snapshots]
+- Images I will use: [list 2-3 images from images.json to embed in Section 3]
+- App-specific UI elements: [list elements from ui-elements.json to include in Section 4]
 - My structural mutation: [page/navigation/hierarchy/interaction]
 - Mutation description: [one sentence explaining how structure changes]
 - Decoration test: Could this be a normal theme with different colors? [must be NO]

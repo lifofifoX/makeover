@@ -33,6 +33,8 @@ Read these files in order:
 2. `tmp/makeover/capture/*.snapshot` - actual content for each page
 3. `tmp/makeover/constraints.json` - your assigned DNA constraints
 4. `DESIGN_SYSTEM.md` - DNA code definitions, spacing scale, color system
+5. `tmp/makeover/capture/images.json` - app images to use in proposals
+6. `tmp/makeover/capture/ui-elements.json` - app-specific UI elements to showcase
 
 ---
 
@@ -44,6 +46,8 @@ Read these files in order:
 VERIFICATION:
 - Pages from manifest: [list them]
 - Content I will use: [2-3 specific items per page from snapshots]
+- Images I will use: [list 2-3 images from images.json to embed in Section 3]
+- App-specific UI elements: [list elements from ui-elements.json to include in Section 4]
 - My DNA code: H#-L#-G#-D#-C#-N#
 - Constraints satisfied: [yes/no with explanation]
 - References (2-3 specific): [list them]
