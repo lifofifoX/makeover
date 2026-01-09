@@ -35,6 +35,7 @@ Read these files in order:
 4. `DESIGN_SYSTEM.md` - DNA code definitions, spacing scale, color system
 5. `tmp/makeover/capture/images.json` - app images to use in proposals
 6. `tmp/makeover/capture/ui-elements.json` - app-specific UI elements to showcase
+7. `tmp/makeover/capture/instructions.md` - additional user instructions (if exists)
 
 ---
 

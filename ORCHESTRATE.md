@@ -70,7 +70,8 @@ tmp/makeover/
 │   ├── manifest.json
 │   ├── {page}.snapshot (per page)
 │   ├── images.json
-│   └── ui-elements.json
+│   ├── ui-elements.json
+│   └── instructions.md (if provided)
 ├── references/ (if browsed)
 │   └── summary.json
 ├── constraints.json

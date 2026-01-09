@@ -51,6 +51,7 @@ Read these files in order:
 3. `tmp/makeover/constraints.json` - your assigned structural mutation
 4. `tmp/makeover/capture/images.json` - app images to use in proposals
 5. `tmp/makeover/capture/ui-elements.json` - app-specific UI elements to showcase
+6. `tmp/makeover/capture/instructions.md` - additional user instructions (if exists)
 
 ---
 

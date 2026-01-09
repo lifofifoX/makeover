@@ -2,7 +2,7 @@
 
 **Skip if:** `tmp/makeover/capture/manifest.json` exists
 **Ask if:** Never
-**Output:** `tmp/makeover/capture/manifest.json`, `*.snapshot`, `images.json`
+**Output:** `tmp/makeover/capture/manifest.json`, `*.snapshot`, `images.json`, `instructions.md`
 
 ---
 
@@ -95,3 +95,15 @@ Options: [All of these (Recommended)] [Select specific pages]
 ```
 
 Update manifest.json with `"included": true/false` per page.
+
+---
+
+## Step 6: Additional Instructions
+
+```
+"Any special instructions for generating proposals?"
+
+Options: [No, continue] [Yes, let me add some]
+```
+
+If user provides instructions, write to `tmp/makeover/capture/instructions.md`. These are passed to proposal agents verbatim.
