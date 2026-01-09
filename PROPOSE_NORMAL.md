@@ -57,18 +57,3 @@ VERIFICATION:
 
 **If you cannot fill in all fields, read the capture files again.**
 
----
-
-## STEP 4: Generate HTML
-
-**Read TEMPLATE.md for the exact HTML structure.** Your proposal MUST have all 5 sections:
-
-1. Theme Header (name, DNA code, references)
-2. Color Palette (swatches with HSL values, palette name, story)
-3. App Content (your redesign with real content from captures)
-4. UI Elements (buttons, inputs, cards, alerts, modal, loading, empty)
-5. Motion Showcase (if N3+, interactive demos)
-
-**Missing any section = invalid proposal.**
-
-Output: `tmp/makeover/themes/{name}.html`

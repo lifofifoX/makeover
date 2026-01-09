@@ -74,18 +74,3 @@ VERIFICATION:
 
 **If "decoration test" is YES, you need a more radical structural mutation.**
 
----
-
-## STEP 4: Generate HTML
-
-**Read TEMPLATE.md for the exact HTML structure.** Your proposal MUST have all 5 sections:
-
-1. Theme Header (name, concept, structural mutation, references)
-2. Color Palette (swatches with HSL values, palette name, story)
-3. App Content (your wild redesign with real content)
-4. UI Elements (buttons, inputs, cards, alerts, modal, loading, empty)
-5. Motion Showcase (interactive demos)
-
-**Missing any section = invalid proposal.**
-
-Output: `tmp/makeover/themes/{name}.html`

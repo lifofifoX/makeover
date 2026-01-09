@@ -14,6 +14,11 @@ Router for proposal generation. Check JSON files and load only needed modules.
 
 All paths relative to `tmp/makeover/`.
 
+**Before spawning agents**, read these files to inject into prompts:
+- `capture/images.json` - available images
+- `capture/ui-elements.json` - app-specific UI elements
+- `capture/instructions.md` - critical constraints (if exists)
+
 ---
 
 ## Clarify Intent
@@ -43,24 +48,61 @@ Assign different structural mutations to each proposal. No two proposals share t
 
 ---
 
-## Spawn Proposal Agents
+## Spawn Proposal Agents (Two-Stage)
 
-Launch all agents in parallel:
+### Stage 1: Verification
+
+Before reading capture files, orchestrator extracts their contents to inject into prompts.
+
+Launch verification agents in parallel:
 
 ```
 Task(
   subagent_type="general-purpose",
-  description="Propose {name} theme",
+  description="Verify {name} theme",
   prompt="""
-Create theme proposal: {name} ({mode} mode)
+Theme verification: {name} ({mode} mode)
 
-Read and follow PROPOSE_{mode}.md exactly.
+Read and follow PROPOSE_{mode}.md. Output ONLY a verification block - no HTML yet.
 
 Assignment:
 - Theme name: {name}
 - Mode: {mode}
 - Constraints: tmp/makeover/constraints.json
+
+AVAILABLE IMAGES:
+{images_json_contents}
+
+APP UI ELEMENTS:
+{ui_elements_json_contents}
+
+{instructions_block}
 """
+)
+```
+
+**Template variables:**
+- `{images_json_contents}` - Full contents of `capture/images.json`
+- `{ui_elements_json_contents}` - Full contents of `capture/ui-elements.json`
+- `{instructions_block}` - Empty if no `capture/instructions.md`, otherwise:
+  ```
+  CRITICAL CONSTRAINTS (from instructions.md):
+  {actual contents}
+  ```
+
+### Stage 2: Review & Generate
+
+Review each verification response:
+- All fields filled? Images selected from available list?
+- DNA/mutation matches constraints.json assignment?
+- If issues found, provide feedback and re-run verification.
+
+Once verified, resume agents to generate HTML:
+
+```
+Task(
+  resume="{agent_id}",
+  prompt="Generate HTML. Follow TEMPLATE.md. Output: tmp/makeover/themes/{name}.html"
 )
 ```
 
