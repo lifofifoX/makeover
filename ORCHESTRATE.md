@@ -16,6 +16,12 @@ All paths relative to `tmp/makeover/`.
 
 ---
 
+## Clarify Intent
+
+If user prompt is ambiguous or could benefit from clarification, use AskUserQuestion to understand their intent before planning. Probe what they actually mean - don't offer prescriptive options.
+
+---
+
 ## Variance Planning
 
 Pre-compute constraints to ensure diverse proposals. Write to `tmp/makeover/constraints.json` (or append if file exists).
