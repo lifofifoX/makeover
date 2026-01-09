@@ -49,9 +49,6 @@ Read these files in order:
 1. `tmp/makeover/capture/manifest.json` - pages, styling system
 2. `tmp/makeover/capture/*.snapshot` - actual content for each page
 3. `tmp/makeover/constraints.json` - your assigned structural mutation
-4. `tmp/makeover/capture/images.json` - app images to use in proposals
-5. `tmp/makeover/capture/ui-elements.json` - app-specific UI elements to showcase
-6. `tmp/makeover/capture/instructions.md` - app quirks/technical constraints (if exists)
 
 ---
 
@@ -62,9 +59,6 @@ Read these files in order:
 ```
 VERIFICATION:
 - Pages from manifest: [list them]
-- Content I will use: [2-3 specific items per page from snapshots]
-- Images I will use: [list 2-3 images from images.json to embed in Section 3]
-- App-specific UI elements: [list elements from ui-elements.json to include in Section 4]
 - My structural mutation: [page/navigation/hierarchy/interaction]
 - Mutation description: [one sentence explaining how structure changes]
 - Decoration test: Could this be a normal theme with different colors? [must be NO]
@@ -78,14 +72,7 @@ VERIFICATION:
 
 ## STEP 4: Generate HTML
 
-**Read TEMPLATE.md for the exact HTML structure.** Your proposal MUST have all 5 sections:
-
-1. Theme Header (name, concept, structural mutation, references)
-2. Color Palette (swatches with HSL values, palette name, story)
-3. App Content (your wild redesign with real content)
-4. UI Elements (buttons, inputs, cards, alerts, modal, loading, empty)
-5. Motion Showcase (interactive demos)
-
-**Missing any section = invalid proposal.**
+**Read `tmp/makeover/capture/instructions.md` for technical constraints (if exists).**
+**Read TEMPLATE.md for section requirements and HTML structure.**
 
 Output: `tmp/makeover/themes/{name}.html`
