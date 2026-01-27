@@ -4,6 +4,24 @@ Router for proposal generation. Check JSON files and load only needed modules.
 
 ---
 
+## Pre-flight Check
+
+**Before proceeding, verify the frontend-design plugin is available.**
+
+If frontend-design plugin is not installed:
+
+> **Required dependency missing.**
+>
+> The makeover skill requires the frontend-design plugin to generate proposals.
+>
+> Install it with: `/plugins add claude-plugins-official/frontend-design`
+>
+> Then run `/makeover propose` again.
+
+Stop execution if the dependency is missing.
+
+---
+
 ## Execution Flow
 
 | Step | Check File | If Missing | If Exists |

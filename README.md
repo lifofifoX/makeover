@@ -1,20 +1,29 @@
 # Makeover
 
-A Claude Code skill that redesigns any existing application with distinctive, production-grade visual themes.
-
-## Requirements
-
-| Dependency | Purpose | Installation |
-|------------|---------|--------------|
-| **frontend-design plugin** | Generates distinctive, high-quality designs | `/plugins add claude-plugins-official/frontend-design` |
-| **[Playwright MCP](https://github.com/microsoft/playwright-mcp)** | Browses your app to capture real UI | `claude mcp add playwright npx @playwright/mcp@latest` |
+A Claude Code plugin that redesigns any existing application with distinctive, production-grade visual themes.
 
 ## Installation
 
 ```bash
-mkdir -p .claude/skills
-git clone https://github.com/lifofifoX/makeover .claude/skills/makeover
+/plugins add lifofifoX/makeover
 ```
+
+### Dependencies
+
+| Dependency | Purpose | Installation |
+|------------|---------|--------------|
+| **frontend-design plugin** | Generates distinctive designs | `/plugins add claude-plugins-official/frontend-design` |
+| **Browser automation** (one of these) | Browses your app to capture real UI | See below |
+
+#### Browser Automation Options
+
+| Option | Setup | Notes |
+|--------|-------|-------|
+| Claude Chrome | Run Claude with `--chrome` flag | Native, recommended |
+| agent-browser | `npm i -g agent-browser && agent-browser install` | Lightweight |
+| Playwright MCP | `claude mcp add playwright npx @playwright/mcp@latest` | Full-featured |
+
+The skill auto-detects which tool is available. If none are configured, it falls back to code analysis mode (no live browsing).
 
 ## Quick Start
 
@@ -25,7 +34,7 @@ npm run dev  # or your dev command
 # 2. Generate theme proposals
 /makeover propose 3 "dark" "minimal"
 # → Asks for app URL
-# → Browses with Playwright, captures your UI
+# → Browses with available tool, captures your UI
 # → Asks which pages to include
 # → Generates proposals using your real content
 
@@ -48,7 +57,7 @@ open tmp/makeover/themes/index.html
 ```
 
 1. Asks where your app is running (default: localhost:3000)
-2. Browses your app with Playwright, discovers pages
+2. Browses your app with browser automation, discovers pages
 3. Asks which pages to include in proposals
 4. Captures real DOM content, images, text
 5. Detects your styling system (Tailwind, CSS modules, etc.)
@@ -103,6 +112,35 @@ Wild themes use unconventional navigation, theatrical data presentation, visual 
 - **Use images** — visual references are more effective than keywords
 - **Iterate** — refine proposals with specific feedback
 - **Check mobile** — proposals include responsive layouts
+
+## Migrating from Local Skill
+
+If you previously cloned this repo to `~/.claude/skills/makeover`:
+
+1. Install the plugin: `/plugins add lifofifoX/makeover`
+2. Remove the old skill: `rm -rf ~/.claude/skills/makeover`
+3. Your existing `tmp/makeover/` data in projects remains compatible
+
+## Troubleshooting
+
+### "Required dependency missing" error
+
+Install the frontend-design plugin:
+```bash
+/plugins add claude-plugins-official/frontend-design
+```
+
+### Browser automation not working
+
+1. Verify one of the browser tools is installed (see Dependencies above)
+2. If using Claude Chrome, make sure you're running with `--chrome` flag
+3. Check that your app is running and accessible at the URL you provide
+
+### Proposals not matching my app
+
+- Make sure the app is fully loaded before running `/makeover propose`
+- Check `tmp/makeover/capture/manifest.json` to see what pages were captured
+- Add specific instructions in `tmp/makeover/capture/instructions.md` for app quirks
 
 ## License
 
