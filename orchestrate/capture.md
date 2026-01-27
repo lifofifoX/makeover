@@ -6,6 +6,16 @@
 
 ---
 
+## Step 0: Detect Browser Tool
+
+Follow `lib/browser.md` to detect available browser automation.
+
+**Announce:** "Using [tool name] for browser automation." or "No browser available, analyzing code instead."
+
+If no browser tool available, skip to **Step 1b: Code Analysis Mode**.
+
+---
+
 ## Step 1: Get App URL
 
 ```
@@ -15,9 +25,38 @@ Default: http://localhost:3000
 
 ---
 
+## Step 1b: Code Analysis Mode (No Browser)
+
+**Only if no browser tool available.**
+
+Instead of browsing, analyze app source code:
+
+1. Find view files: `*.html`, `*.erb`, `*.jsx`, `*.tsx`, `*.vue`, `*.svelte`
+2. Find route definitions: `routes.rb`, `router.js`, `pages/` directory
+3. Read files and extract:
+   - Page structure (headings, sections, components)
+   - Image references (`<img>`, `Image` components)
+   - Navigation structure (links, menus)
+   - Styling system (Tailwind classes, CSS imports)
+
+Generate manifest with `"source": "code_analysis"`:
+```json
+{
+  "app_url": "http://localhost:3000",
+  "source": "code_analysis",
+  "captured_at": "...",
+  "styling_system": "...",
+  "pages": [...]
+}
+```
+
+**Skip to Step 5** after code analysis.
+
+---
+
 ## Step 2: Discover Pages
 
-Navigate and explore:
+Using browser adapter (see `lib/browser.md`), navigate and explore:
 - Click navigation links
 - Follow any visible routes in the UI
 - Look at DOM for route information
@@ -52,7 +91,7 @@ tmp/makeover/capture/
 ```
 
 **{page}.snapshot** (one per page):
-- Accessibility tree snapshot from Playwright
+- Accessibility tree snapshot via browser adapter
 - Includes: headings, buttons, forms, images, text content
 - Actual content, not structure description
 
@@ -67,7 +106,8 @@ tmp/makeover/capture/
 ```
 
 Rules:
-- Extract `src` directly from DOM (`document.querySelectorAll('img')`) — not from accessibility tree
+- Extract `src` via JS execution (`document.querySelectorAll('img')`) when available
+- Fallback: parse accessibility tree for image elements if JS execution unavailable
 - Full URLs only — never truncate
 - Only `<img>` elements — skip iframes, embedded content, data URIs
 - Skip decorative/icon images (small UI elements)

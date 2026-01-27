@@ -10,7 +10,16 @@ description: Redesign any app with distinctive, production-grade visual themes u
 | Dependency | Installation |
 |------------|--------------|
 | frontend-design plugin | `/plugins add claude-plugins-official/frontend-design` |
-| Playwright MCP | `claude mcp add playwright npx @playwright/mcp@latest` |
+
+### Browser Automation (one of these)
+
+| Option | Setup | Notes |
+|--------|-------|-------|
+| Claude Chrome | Run with `--chrome` flag | Native, recommended |
+| agent-browser | `npm i -g agent-browser && agent-browser install` | Lightweight, context-efficient |
+| Playwright MCP | `claude mcp add playwright npx @playwright/mcp@latest` | Full-featured |
+
+Skill auto-detects available tool. No config needed if using `--chrome`. Without browser tools, skill analyzes code instead.
 
 ## Command Parsing
 
