@@ -114,15 +114,6 @@ Wild themes use unconventional navigation, theatrical data presentation, visual 
 - **Iterate** — refine proposals with specific feedback
 - **Check mobile** — proposals include responsive layouts
 
-## Migrating from Local Skill
-
-If you previously cloned this repo to `~/.claude/skills/makeover`:
-
-1. Add the marketplace: `/plugin marketplace add https://github.com/lifofifoX/makeover`
-2. Install the plugin: `/plugin install makeover`
-3. Remove the old skill: `rm -rf ~/.claude/skills/makeover`
-4. Your existing `tmp/makeover/` data in projects remains compatible
-
 ## Troubleshooting
 
 ### "Required dependency missing" error
