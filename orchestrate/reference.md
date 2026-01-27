@@ -8,7 +8,9 @@
 
 ## When User Provides URLs
 
-1. Navigate to each URL with Playwright
+Using browser adapter (see `lib/browser.md`):
+
+1. Navigate to each URL
 2. Take snapshots
 3. Extract patterns:
 
