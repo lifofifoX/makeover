@@ -4,13 +4,15 @@ Unified interface over available browser automation tools. Auto-detects and uses
 
 ## Tool Detection
 
-Check tools in priority order, use first available:
+Check tools in priority order, use first **working** option:
 
-| Priority | Tool | Detection |
-|----------|------|-----------|
-| 1 | claude-in-chrome | `mcp__claude-in-chrome__navigate` tool exists |
-| 2 | agent-browser | Bash `which agent-browser` returns path |
-| 3 | Playwright MCP | `mcp__playwright__browser_navigate` tool exists |
+| Priority | Tool | Detection | Verification |
+|----------|------|-----------|--------------|
+| 1 | claude-in-chrome | Tool exists | `tabs_context_mcp` succeeds (no "not connected" error) |
+| 2 | agent-browser | `which agent-browser` returns path | None |
+| 3 | Playwright MCP | Tool exists | None |
+
+**Important:** For claude-in-chrome, the tool existing is not enough. Call `tabs_context_mcp` first. If it returns "Browser extension is not connected", skip to next option.
 
 **Announce selection:** "Using [tool name] for browser automation."
 
@@ -22,7 +24,7 @@ Run before first browser operation:
 
 | Tool | Setup Required |
 |------|----------------|
-| claude-in-chrome | `tabs_context_mcp` then `tabs_create_mcp` to get tabId |
+| claude-in-chrome | `tabs_create_mcp` to get tabId (context already verified during detection) |
 | agent-browser | None |
 | Playwright MCP | None |
 
@@ -86,7 +88,7 @@ Get page text content.
 
 ## No Browser Available
 
-If no browser tool detected:
+If no browser tool is working (either doesn't exist or verification fails):
 
 1. Announce: "No browser automation available. Analyzing app code instead."
 2. Read app source files (HTML, JSX, ERB, etc.) to understand structure
@@ -94,3 +96,16 @@ If no browser tool detected:
 4. Note in `manifest.json`: `"source": "code_analysis"` instead of `"source": "browser"`
 
 This provides degraded but functional experience without requiring browser setup.
+
+---
+
+## Detection Flow Example
+
+```
+1. Check claude-in-chrome tool exists? Yes
+2. Call tabs_context_mcp
+3. Response contains "not connected"? → Skip, try next
+4. Check agent-browser: `which agent-browser` → Not found → Skip
+5. Check Playwright MCP tool exists? No → Skip
+6. No working tools → Use code analysis mode
+```
