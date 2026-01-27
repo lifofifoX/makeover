@@ -1,0 +1,25 @@
+{
+  "name": "makeover-marketplace",
+  "owner": {
+    "name": "lifofifoX",
+    "url": "https://github.com/lifofifoX"
+  },
+  "metadata": {
+    "description": "Plugin marketplace for the Makeover skill",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "makeover",
+      "description": "Redesign any app with distinctive, production-grade visual themes using real UI content. Browses your running app, captures real content, generates multiple theme proposals, and implements your chosen design.",
+      "version": "1.0.0",
+      "author": {
+        "name": "lifofifoX",
+        "url": "https://github.com/lifofifoX"
+      },
+      "homepage": "https://github.com/lifofifoX/makeover",
+      "tags": ["design", "frontend", "themes", "ui", "redesign", "makeover"],
+      "source": "./plugins/makeover"
+    }
+  ]
+}

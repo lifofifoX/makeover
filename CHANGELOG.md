@@ -9,13 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Converted from local skill to Claude Code plugin format
-- Moved skill files to `skills/makeover/` directory
-- Added `.claude-plugin/plugin.json` manifest
+- Converted from local skill to Claude Code plugin marketplace format
+- Moved skill files to `plugins/makeover/` directory
+- Added `.claude-plugin/marketplace.json` manifest
 
 ### Added
 
-- Plugin installation via `/plugins add lifofifoX/makeover`
+- Plugin installation via marketplace:
+  ```
+  /plugin marketplace add https://github.com/lifofifoX/makeover
+  /plugin install makeover
+  ```
 - Auto-update support through Claude Code plugin system
 - Pre-flight dependency check for frontend-design plugin
 - MIT license
@@ -25,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 If you previously installed this as a local skill:
 
-1. Install the plugin: `/plugins add lifofifoX/makeover`
-2. Remove the old skill: `rm -rf ~/.claude/skills/makeover`
-3. Your existing `tmp/makeover/` data remains compatible
+1. Add marketplace: `/plugin marketplace add https://github.com/lifofifoX/makeover`
+2. Install plugin: `/plugin install makeover`
+3. Remove old skill: `rm -rf ~/.claude/skills/makeover`
+4. Your existing `tmp/makeover/` data remains compatible

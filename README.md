@@ -5,7 +5,8 @@ A Claude Code plugin that redesigns any existing application with distinctive, p
 ## Installation
 
 ```bash
-/plugins add lifofifoX/makeover
+/plugin marketplace add https://github.com/lifofifoX/makeover
+/plugin install makeover
 ```
 
 ### Dependencies
@@ -117,9 +118,10 @@ Wild themes use unconventional navigation, theatrical data presentation, visual 
 
 If you previously cloned this repo to `~/.claude/skills/makeover`:
 
-1. Install the plugin: `/plugins add lifofifoX/makeover`
-2. Remove the old skill: `rm -rf ~/.claude/skills/makeover`
-3. Your existing `tmp/makeover/` data in projects remains compatible
+1. Add the marketplace: `/plugin marketplace add https://github.com/lifofifoX/makeover`
+2. Install the plugin: `/plugin install makeover`
+3. Remove the old skill: `rm -rf ~/.claude/skills/makeover`
+4. Your existing `tmp/makeover/` data in projects remains compatible
 
 ## Troubleshooting
 
