@@ -12,7 +12,7 @@ Follow `lib/browser.md` to detect available browser automation.
 
 **Announce:** "Using [tool name] for browser automation." or "No browser available, analyzing code instead."
 
-If no browser tool available, skip to **Step 1b: Code Analysis Mode**.
+If no browser tool available, after Step 1 skip to **Step 1b: Code Analysis Mode**.
 
 ---
 
@@ -42,13 +42,15 @@ Instead of browsing, analyze app source code:
 Generate manifest with `"source": "code_analysis"`:
 ```json
 {
-  "app_url": "http://localhost:3000",
+  "app_url": "<from Step 1>",
   "source": "code_analysis",
   "captured_at": "...",
   "styling_system": "...",
   "pages": [...]
 }
 ```
+
+Use app_url to resolve relative image paths found in code.
 
 **Skip to Step 5** after code analysis.
 
