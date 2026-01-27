@@ -1,0 +1,11 @@
+{
+  "name": "makeover",
+  "version": "1.0.0",
+  "description": "Redesign any app with distinctive, production-grade visual themes using real UI content.",
+  "author": {
+    "name": "lifofifoX",
+    "url": "https://github.com/lifofifoX"
+  },
+  "homepage": "https://github.com/lifofifoX/makeover",
+  "license": "MIT"
+}

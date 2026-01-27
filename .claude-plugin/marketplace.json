@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "makeover-marketplace",
+  "description": "Plugin marketplace for Makeover",
+  "owner": {
+    "name": "lifofifoX"
+  },
+  "plugins": [
+    {
+      "name": "makeover",
+      "description": "Redesign any app with distinctive, production-grade visual themes using real UI content.",
+      "version": "1.0.0",
+      "author": {
+        "name": "lifofifoX"
+      },
+      "source": "./plugins/makeover",
+      "homepage": "https://github.com/lifofifoX/makeover",
+      "category": "design"
+    }
+  ]
+}
